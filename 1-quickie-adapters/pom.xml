@@ -2,27 +2,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>org.pinkcrazyunicorn</groupId>
+        <artifactId>quickie</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.pinkcrazyunicorn</groupId>
-    <artifactId>quickie</artifactId>
-    <packaging>pom</packaging>
-    <version>1.0-SNAPSHOT</version>
-
-    <properties>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
-
-    <modules>
-        <module>0-quickie-plugin-cli</module>
-        <module>0-quickie-plugin-db</module>
-        <module>0-quickie-plugin-scraper</module>
-        <module>1-quickie-adapters</module>
-        <module>2-quickie-application</module>
-        <module>3-quickie-domain</module>
-    </modules>
+    <artifactId>1-quickie-adapters</artifactId>
 
     <build>
         <plugins>
@@ -39,4 +26,14 @@
         </plugins>
     </build>
 
+    <dependencies>
+
+        <dependency>
+            <groupId>org.pinkcrazyunicorn</groupId>
+            <artifactId>2-quickie-application</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+
+    </dependencies>
 </project>
