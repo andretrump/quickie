@@ -1,4 +1,4 @@
-package org.pinkcrazyunicorn.user;
+package org.pinkcrazyunicorn.profile;
 
 import org.pinkcrazyunicorn.Food;
 

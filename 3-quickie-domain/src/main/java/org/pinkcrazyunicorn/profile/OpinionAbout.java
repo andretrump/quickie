@@ -1,4 +1,4 @@
-package org.pinkcrazyunicorn.user;
+package org.pinkcrazyunicorn.profile;
 
 import org.pinkcrazyunicorn.Food;
 
@@ -15,5 +15,9 @@ public final class OpinionAbout {
         }
         this.food = food;
         this.opinion = opinion;
+    }
+
+    public boolean isAbout(Food food) {
+        return this.food == food;
     }
 }

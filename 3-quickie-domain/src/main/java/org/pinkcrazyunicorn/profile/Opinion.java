@@ -1,4 +1,4 @@
-package org.pinkcrazyunicorn.user;
+package org.pinkcrazyunicorn.profile;
 
 abstract public class Opinion {
     public static final Opinion Foodgasm = new FoodgasmType();
