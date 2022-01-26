@@ -11,6 +11,10 @@ abstract public class Opinion {
 
     private String name;
 
+    public String getName() {
+        return name;
+    }
+
     public Opinion(String name) {
         this.name = name;
     }

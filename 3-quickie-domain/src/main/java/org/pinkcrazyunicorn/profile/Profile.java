@@ -3,6 +3,7 @@ package org.pinkcrazyunicorn.profile;
 import org.pinkcrazyunicorn.Food;
 
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Optional;
 
 public class Profile {
@@ -67,5 +68,17 @@ public class Profile {
     @Override
     public int hashCode() {
         return name != null ? name.hashCode() : 0;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public Stock getStock() {
+        return this.stock;
+    }
+
+    public Collection<OpinionAbout> getOpinions() {
+        return this.opinions;
     }
 }

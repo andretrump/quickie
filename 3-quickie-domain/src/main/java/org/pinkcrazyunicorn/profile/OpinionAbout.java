@@ -20,4 +20,12 @@ public final class OpinionAbout {
     public boolean isAbout(Food food) {
         return this.food == food;
     }
+
+    public Food getFood() {
+        return food;
+    }
+
+    public Opinion getOpinion() {
+        return opinion;
+    }
 }

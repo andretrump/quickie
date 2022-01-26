@@ -3,7 +3,6 @@
 - View profiles
 - Add profile
 - Remove profile
-- Select profile
 ## Manage stock
 - View stock
 - Add food to stock
