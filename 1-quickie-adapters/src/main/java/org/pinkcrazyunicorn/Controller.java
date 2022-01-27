@@ -17,6 +17,13 @@ public class Controller {
         this.registerProfile();
     }
 
+    public void run() {
+        Event event;
+        while ((event = ui.getUserEvent()) != null) {
+            ui.handleEvent(event);
+        }
+    }
+
     private void registerProfile() {
         this.ui.registerEvent(new EventType("addProfile"), new AddProfileCallback(profileService));
         this.ui.registerEvent(new EventType("viewProfile"), new ViewProfileCallback(profileService));

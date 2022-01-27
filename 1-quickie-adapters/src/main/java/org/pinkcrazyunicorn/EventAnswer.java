@@ -1,20 +1,27 @@
 package org.pinkcrazyunicorn;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
 public class EventAnswer {
-    private String payload;
+    private String title;
     private Map<String, String> properties;
 
-    public EventAnswer(String payload) {
-        this.payload = payload;
+    public EventAnswer(String title) {
+        this.title = title;
         this.properties = new HashMap<>();
     }
 
     public EventAnswer(String payload, Map<String, String> properties) {
-        this.payload = payload;
+        this.title = payload;
         this.properties = properties;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public Map<String, String> getProperties() {
+        return properties;
     }
 }

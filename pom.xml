@@ -16,6 +16,7 @@
     </properties>
 
     <modules>
+        <module>0-quickie-main</module>
         <module>0-quickie-plugin-cli</module>
         <module>0-quickie-plugin-db</module>
         <module>0-quickie-plugin-scraper</module>

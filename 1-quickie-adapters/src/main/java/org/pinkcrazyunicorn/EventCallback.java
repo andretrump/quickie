@@ -1,5 +1,7 @@
 package org.pinkcrazyunicorn;
 
+import java.util.Map;
+
 public interface EventCallback {
-    EventAnswer call(String data);
+    EventAnswer call(Map<String, String> data);
 }

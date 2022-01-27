@@ -15,7 +15,7 @@
 ## Manage recipes
 - Add data source
 - Refresh recipes from data source
-## Main use cases
+## org.pinkcrazyunicorn.Main use cases
 - View recipe
 - Browse recipes by different sorting
 - Get matching recipes to a given recipe using a heuristic based on used ingredients, stock and opinions

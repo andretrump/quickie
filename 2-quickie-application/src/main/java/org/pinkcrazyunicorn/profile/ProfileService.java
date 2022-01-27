@@ -10,14 +10,8 @@ public class ProfileService {
         this.repository = repository;
     }
 
-    public void save(Profile profile) {
-        this.repository.save(profile);
-    }
-
     public void add(String name) {
-        Stock stock = new Stock(new HashSet<>());
-        Profile profile = new Profile(name, stock, new HashSet<OpinionAbout>());
-        this.repository.save(profile);
+        this.repository.add(name);
     }
 
     public void remove(String name) {

@@ -17,15 +17,16 @@ public class ViewProfileCallback implements EventCallback {
     }
 
     @Override
-    public EventAnswer call(String data) {
-        Profile profile = this.service.getBy(data);
+    public EventAnswer call(Map<String, String> data) {
+        String name = data.get("name");
+        Profile profile = this.service.getBy(name);
 
         Map<String, String> properties = new HashMap<>();
         properties.put("name", profile.getName());
         properties.putAll(mapStock(profile.getStock()));
         properties.putAll(mapOpinions(profile.getOpinions()));
 
-        return new EventAnswer(data, properties);
+        return new EventAnswer(name, properties);
     }
 
     private Map<String, String> mapOpinions(Collection<OpinionAbout> opinions) {

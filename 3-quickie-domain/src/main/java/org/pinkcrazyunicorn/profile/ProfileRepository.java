@@ -1,7 +1,7 @@
 package org.pinkcrazyunicorn.profile;
 
 public interface ProfileRepository {
-    void save(Profile profile);
+    void add(String name);
     Iterable<Profile> getAll();
 
     Profile getBy(String name);
