@@ -1,10 +1,14 @@
-package org.pinkcrazyunicorn;
+package org.pinkcrazyunicorn.event;
 
 public final class EventType {
     private final String name;
 
     public EventType(String name) {
         this.name = name;
+    }
+
+    public String getName() {
+        return name;
     }
 
     @Override

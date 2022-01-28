@@ -1,6 +1,7 @@
 package org.pinkcrazyunicorn.profile;
 
 import java.util.HashSet;
+import java.util.Optional;
 
 public class ProfileService {
     private ProfileRepository repository;
@@ -18,7 +19,7 @@ public class ProfileService {
         this.repository.remove(name);
     }
 
-    public Profile getBy(String name) {
+    public Optional<Profile> getBy(String name) {
         return this.repository.getBy(name);
     }
 }

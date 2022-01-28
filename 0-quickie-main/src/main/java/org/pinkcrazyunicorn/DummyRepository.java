@@ -3,6 +3,8 @@ package org.pinkcrazyunicorn;
 import org.pinkcrazyunicorn.profile.Profile;
 import org.pinkcrazyunicorn.profile.ProfileRepository;
 
+import java.util.Optional;
+
 public class DummyRepository implements ProfileRepository {
     @Override
     public void add(String name) {
@@ -15,8 +17,8 @@ public class DummyRepository implements ProfileRepository {
     }
 
     @Override
-    public Profile getBy(String name) {
-        return null;
+    public Optional<Profile> getBy(String name) {
+        return Optional.empty();
     }
 
     @Override

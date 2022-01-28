@@ -1,5 +1,7 @@
 package org.pinkcrazyunicorn;
 
+import org.pinkcrazyunicorn.event.Event;
+import org.pinkcrazyunicorn.event.EventType;
 import org.pinkcrazyunicorn.profile.AddProfileCallback;
 import org.pinkcrazyunicorn.profile.ProfileService;
 import org.pinkcrazyunicorn.profile.ViewProfileCallback;

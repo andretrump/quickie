@@ -1,4 +1,4 @@
-package org.pinkcrazyunicorn;
+package org.pinkcrazyunicorn.event;
 
 import java.util.Map;
 
