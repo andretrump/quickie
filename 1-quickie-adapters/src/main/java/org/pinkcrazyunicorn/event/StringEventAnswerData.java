@@ -8,7 +8,7 @@ public class StringEventAnswerData implements EventAnswerData {
     }
 
     @Override
-    public String toJson() {
+    public String toJson(int indentationLevel) {
         return "\"" + this.data + "\"";
     }
 }

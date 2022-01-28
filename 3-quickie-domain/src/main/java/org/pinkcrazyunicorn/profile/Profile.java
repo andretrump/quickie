@@ -26,6 +26,15 @@ public class Profile {
         this.opinions = opinions;
     }
 
+    public Profile(String name) {
+        if (name == null) {
+            throw new IllegalArgumentException("Name of Profile must be non-null");
+        }
+        this.name = name;
+        this.stock = new Stock();
+        this.opinions = new HashSet<>();
+    }
+
     public void addOpinionAbout(Opinion opinion, Food food) {
         Optional<OpinionAbout> existingOpinion = this.getOpinionAbout(food);
         if (existingOpinion.isPresent()) {

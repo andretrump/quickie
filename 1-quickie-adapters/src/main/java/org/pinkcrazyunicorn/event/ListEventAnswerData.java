@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 
 public class ListEventAnswerData extends ArrayList<EventAnswerData> implements EventAnswerData {
     @Override
-    public String toJson() {
+    public String toJson(int indentationLevel) {
         return "[" +
                 this.stream()
                         .map(data -> data.toJson())

@@ -12,6 +12,10 @@ public class Stock {
         this.foodInStock = foodInStock;
     }
 
+    public Stock() {
+        this.foodInStock = new HashSet<>();
+    }
+
     public void add(Food food) {
         this.foodInStock.add(food);
     }
