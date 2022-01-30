@@ -3,10 +3,10 @@
 - View profiles
 - Add profile
 - Remove profile
-## Manage stock
-- View stock
-- Add food to stock
-- Remove food from stock
+## Manage available food
+- View availble food
+- Add food to available food
+- Remove food from available food
 ## Manage opinions
 - View opinions about food
 - Add opinion about food
@@ -15,7 +15,7 @@
 ## Manage recipes
 - Add data source
 - Refresh recipes from data source
-## org.pinkcrazyunicorn.Main use cases
+## Main use cases
 - View recipe
 - Browse recipes by different sorting
 - Get matching recipes to a given recipe using a heuristic based on used ingredients, stock and opinions
