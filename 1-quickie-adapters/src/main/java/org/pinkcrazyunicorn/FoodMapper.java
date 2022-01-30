@@ -22,4 +22,8 @@ public class FoodMapper {
     public EventAnswerData mapToEventAnswer(Food food) {
         return new StringEventAnswerData(food.getName());
     }
+
+    public Food fromString(String foodString) {
+        return new Food(foodString);
+    }
 }

@@ -10,4 +10,6 @@ public interface ProfileRepository {
     Optional<Profile> getBy(String name);
 
     void remove(String name);
+
+    void update(Profile profile);
 }

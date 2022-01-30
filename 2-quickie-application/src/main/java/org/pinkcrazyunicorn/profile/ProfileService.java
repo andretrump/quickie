@@ -1,7 +1,8 @@
 package org.pinkcrazyunicorn.profile;
 
+import org.pinkcrazyunicorn.Food;
+
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.Optional;
 
 public class ProfileService {
@@ -26,5 +27,25 @@ public class ProfileService {
 
     public Collection<Profile> getAll() {
         return this.repository.getAll();
+    }
+
+    public void addOpinionAbout(String name, Food food, Opinion opinion) {
+        Optional<Profile> maybeProfile = this.getBy(name);
+        if (maybeProfile.isEmpty()) {
+            throw new IllegalArgumentException("Profile to add opinion to was not found");
+        }
+        Profile profile = maybeProfile.get();
+        profile.addOpinionAbout(food, opinion);
+        this.repository.update(profile);
+    }
+
+    public void addToAvailable(String name, Food food) {
+        Optional<Profile> maybeProfile = this.getBy(name);
+        if (maybeProfile.isEmpty()) {
+            throw new IllegalArgumentException("Profile to add opinion to was not found");
+        }
+        Profile profile = maybeProfile.get();
+        profile.addToAvailable(food);
+        this.repository.update(profile);
     }
 }

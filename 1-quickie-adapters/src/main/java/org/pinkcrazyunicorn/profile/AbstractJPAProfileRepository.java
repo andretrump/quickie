@@ -8,6 +8,8 @@ public abstract class AbstractJPAProfileRepository implements ProfileRepository 
     protected abstract Collection<JPAProfile> getAllJPA();
     protected abstract Optional<JPAProfile> getByJPA(String name);
     protected abstract void addJPA(JPAProfile profile);
+    protected abstract void updateJPA(JPAProfile profile);
+    protected abstract void removeJPA(JPAProfile jpaProfile);
 
     private ProfileMapper mapper;
 
@@ -36,5 +38,20 @@ public abstract class AbstractJPAProfileRepository implements ProfileRepository 
         Profile profile = new Profile(name);
         JPAProfile jpa = this.mapper.mapToJPAProfile(profile);
         this.addJPA(jpa);
+    }
+
+    @Override
+    public void update(Profile profile) {
+        JPAProfile jpa = this.mapper.mapToJPAProfile(profile);
+        this.updateJPA(jpa);
+    }
+
+    @Override
+    public void remove(String name) {
+        Optional<JPAProfile> maybeJpa = this.getByJPA(name);
+        if (maybeJpa.isEmpty()) {
+            return;
+        }
+        this.removeJPA(maybeJpa.get());
     }
 }

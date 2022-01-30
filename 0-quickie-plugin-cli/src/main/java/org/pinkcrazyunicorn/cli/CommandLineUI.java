@@ -48,6 +48,8 @@ public class CommandLineUI implements UI {
         Options options = new Options();
         String commandsString = commands.stream().collect(Collectors.joining(", "));
         options.addOption("n", "profile-name", true, "name of profile to use");
+        options.addOption("f", "food", true, "food");
+        options.addOption("o", "opinion", true, "opinion");
         options.addOption("c", "command", true, "command to execute, possible values: [" + commandsString + "]");
 
         CommandLineParser parser = new DefaultParser();

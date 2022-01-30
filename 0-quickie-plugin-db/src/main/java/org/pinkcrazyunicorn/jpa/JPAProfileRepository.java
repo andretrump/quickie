@@ -49,7 +49,28 @@ public class JPAProfileRepository extends AbstractJPAProfileRepository {
     }
 
     @Override
-    public void remove(String name) {
+    protected void updateJPA(JPAProfile profile) {
+        EntityTransaction transaction = this.entityManager.getTransaction();
+        transaction.begin();
+        try {
+            this.entityManager.merge(profile);
+            transaction.commit();
+        } catch (Exception e) {
+            transaction.rollback();
+            throw e;
+        }
+    }
 
+    @Override
+    protected void removeJPA(JPAProfile profile) {
+        EntityTransaction transaction = this.entityManager.getTransaction();
+        transaction.begin();
+        try {
+            this.entityManager.remove(profile);
+            transaction.commit();
+        } catch (Exception e) {
+            transaction.rollback();
+            throw e;
+        }
     }
 }
