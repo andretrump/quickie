@@ -1,5 +1,6 @@
 package org.pinkcrazyunicorn.profile;
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Optional;
 
@@ -21,5 +22,9 @@ public class ProfileService {
 
     public Optional<Profile> getBy(String name) {
         return this.repository.getBy(name);
+    }
+
+    public Collection<Profile> getAll() {
+        return this.repository.getAll();
     }
 }

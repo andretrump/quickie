@@ -1,12 +1,13 @@
 package org.pinkcrazyunicorn.profile;
 
+import java.util.Collection;
 import java.util.Optional;
 
 public interface ProfileRepository {
     void add(String name);
-    Iterable<Profile> getAll();
+    Collection<Profile> getAll();
 
     Optional<Profile> getBy(String name);
 
-    void remove(String profile);
+    void remove(String name);
 }

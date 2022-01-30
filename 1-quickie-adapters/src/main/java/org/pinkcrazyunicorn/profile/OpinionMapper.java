@@ -16,4 +16,17 @@ public class OpinionMapper {
 
         return result;
     }
+
+    public Opinion fromString(String string) {
+        switch (string) {
+            case "Foodgasm": return Opinion.Foodgasm;
+            case "Love": return Opinion.Love;
+            case "Like": return Opinion.Like;
+            case "Indifferent": return Opinion.Indifferent;
+            case "Dislike": return Opinion.Dislike;
+            case "Hate": return Opinion.Hate;
+            case "Dealbreaker": return Opinion.Dealbreaker;
+            default: return null;
+        }
+    }
 }

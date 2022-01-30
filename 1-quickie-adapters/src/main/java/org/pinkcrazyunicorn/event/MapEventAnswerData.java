@@ -11,7 +11,7 @@ public class MapEventAnswerData extends HashMap<String, EventAnswerData> impleme
         String outerIndentation = this.indentationOf(indentationLevel);
         return "{\n" + innerIndentation +
                 this.entrySet().stream()
-                        .map(e -> e.getKey() + ": " + e.getValue().toJson(indentationLevel + 1))
+                        .map(e -> "\"" + e.getKey() + "\": " + e.getValue().toJson(indentationLevel + 1))
                         .collect(Collectors.joining(",\n" + innerIndentation))
                 + "\n" + outerIndentation + "}";
     }

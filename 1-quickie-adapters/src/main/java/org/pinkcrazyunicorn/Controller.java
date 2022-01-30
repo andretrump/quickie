@@ -5,6 +5,7 @@ import org.pinkcrazyunicorn.event.EventType;
 import org.pinkcrazyunicorn.profile.AddProfileCallback;
 import org.pinkcrazyunicorn.profile.ProfileService;
 import org.pinkcrazyunicorn.profile.ViewProfileCallback;
+import org.pinkcrazyunicorn.profile.ViewProfilesCallback;
 
 public class Controller {
     private UI ui;
@@ -29,5 +30,6 @@ public class Controller {
     private void registerProfile() {
         this.ui.registerEvent(new EventType("addProfile"), new AddProfileCallback(profileService));
         this.ui.registerEvent(new EventType("viewProfile"), new ViewProfileCallback(profileService));
+        this.ui.registerEvent(new EventType("viewProfiles"), new ViewProfilesCallback(profileService));
     }
 }

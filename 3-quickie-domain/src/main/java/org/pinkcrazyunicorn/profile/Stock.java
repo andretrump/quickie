@@ -30,7 +30,7 @@ public class Stock {
         return this.foodInStock.contains(food);
     }
 
-    public Iterable<? extends Food> getFood() {
+    public Collection<Food> getFood() {
         return foodInStock;
     }
 }
