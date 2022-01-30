@@ -1,17 +1,18 @@
-package org.pinkcrazyunicorn.profile;
+package org.pinkcrazyunicorn.jpa;
+
+import org.pinkcrazyunicorn.persistence.PersistentProfile;
 
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 @Entity
 @Table(name = "profile")
-public class JPAProfile {
+public class JPAProfile implements PersistentProfile {
     @Id
     String name;
 
@@ -19,42 +20,36 @@ public class JPAProfile {
     Map<String, String> opinions;
 
     @ElementCollection
-    List<String> stock;
+    Set<String> available;
 
     public JPAProfile() { }
 
-    public JPAProfile(String name, Map<String, String> opinions, List<String> stock) {
-        this.name = name;
-        this.opinions = opinions;
-        this.stock = stock;
-    }
-
-    public JPAProfile(String name) {
-        this.name = name;
-        this.opinions = new HashMap<>();
-        this.stock = new ArrayList<>();
-    }
-
+    @Override
     public String getName() {
         return name;
     }
 
+    @Override
     public Map<String, String> getOpinions() {
         return opinions;
     }
 
-    public List<String> getStock() {
-        return stock;
+    @Override
+    public Set<String> getAvailable() {
+        return available;
     }
 
+    @Override
     public void setName(String name) {
         this.name = name;
     }
 
-    public void setStock(List<String> stock) {
-        this.stock = stock;
+    @Override
+    public void setAvailable(Set<String> stock) {
+        this.available = stock;
     }
 
+    @Override
     public void setOpinions(Map<String, String> opinions) {
         this.opinions = opinions;
     }

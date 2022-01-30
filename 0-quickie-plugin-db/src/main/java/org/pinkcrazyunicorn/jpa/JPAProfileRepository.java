@@ -1,30 +1,32 @@
 package org.pinkcrazyunicorn.jpa;
 
-import org.pinkcrazyunicorn.profile.AbstractJPAProfileRepository;
-import org.pinkcrazyunicorn.profile.JPAProfile;
+import org.pinkcrazyunicorn.persistence.PersistentProfile;
+import org.pinkcrazyunicorn.persistence.PersistentProfileRepository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
-public class JPAProfileRepository extends AbstractJPAProfileRepository {
+public class JPAProfileRepository extends PersistentProfileRepository {
     private final EntityManager entityManager;
 
     public JPAProfileRepository(EntityManager entityManager) {
+        super(new JPAProfileFactory());
         this.entityManager = entityManager;
     }
 
     @Override
-    protected Collection<JPAProfile> getAllJPA() {
+    protected Collection<JPAProfile> persistentGetAll() {
         TypedQuery<JPAProfile> query = this.entityManager.createQuery("SELECT p FROM JPAProfile p", JPAProfile.class);
         return query.getResultList();
     }
 
     @Override
-    protected Optional<JPAProfile> getByJPA(String name) {
+    protected Optional<? extends PersistentProfile> persistentGetBy(String name) {
         TypedQuery<JPAProfile> query = this.entityManager.createQuery("SELECT p FROM JPAProfile p WHERE p.name = ?1", JPAProfile.class);
         query.setParameter(1, name);
         try {
@@ -36,11 +38,14 @@ public class JPAProfileRepository extends AbstractJPAProfileRepository {
     }
 
     @Override
-    protected void addJPA(JPAProfile profile) {
+    protected void persistentAdd(PersistentProfile profile) {
+        if (!(profile instanceof JPAProfile)) {
+            throw new IllegalArgumentException("JPAProfileRepository only supports JPAProfiles");
+        }
         EntityTransaction transaction = this.entityManager.getTransaction();
         transaction.begin();
         try {
-            this.entityManager.persist(profile);
+            this.entityManager.persist((JPAProfile)profile);
             transaction.commit();
         } catch (Exception e) {
             transaction.rollback();
@@ -49,11 +54,14 @@ public class JPAProfileRepository extends AbstractJPAProfileRepository {
     }
 
     @Override
-    protected void updateJPA(JPAProfile profile) {
+    protected void persistentUpdate(PersistentProfile profile) {
+        if (!(profile instanceof JPAProfile)) {
+            throw new IllegalArgumentException("JPAProfileRepository only supports JPAProfiles");
+        }
         EntityTransaction transaction = this.entityManager.getTransaction();
         transaction.begin();
         try {
-            this.entityManager.merge(profile);
+            this.entityManager.merge((JPAProfile)profile);
             transaction.commit();
         } catch (Exception e) {
             transaction.rollback();
@@ -62,11 +70,14 @@ public class JPAProfileRepository extends AbstractJPAProfileRepository {
     }
 
     @Override
-    protected void removeJPA(JPAProfile profile) {
+    protected void persistentRemove(PersistentProfile profile) {
+        if (!(profile instanceof JPAProfile)) {
+            throw new IllegalArgumentException("JPAProfileRepository only supports JPAProfiles");
+        }
         EntityTransaction transaction = this.entityManager.getTransaction();
         transaction.begin();
         try {
-            this.entityManager.remove(profile);
+            this.entityManager.remove((JPAProfile)profile);
             transaction.commit();
         } catch (Exception e) {
             transaction.rollback();
