@@ -1,6 +1,7 @@
 package org.pinkcrazyunicorn.profile;
 
 import org.pinkcrazyunicorn.Food;
+import org.pinkcrazyunicorn.FoodMapper;
 import org.pinkcrazyunicorn.event.EventAnswerData;
 import org.pinkcrazyunicorn.event.ListEventAnswerData;
 import org.pinkcrazyunicorn.event.MapEventAnswerData;
@@ -12,11 +13,11 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class ProfileMapper {
-    StockMapper stockMapper;
+    FoodMapper foodMapper;
     OpinionMapper opinionMapper;
 
     public ProfileMapper() {
-        this.stockMapper = new StockMapper();
+        this.foodMapper = new FoodMapper();
         this.opinionMapper = new OpinionMapper();
     }
 
@@ -24,13 +25,13 @@ public class ProfileMapper {
         MapEventAnswerData result = new MapEventAnswerData();
 
         result.put("name", new StringEventAnswerData(profile.getName()));
-        result.put("stock", this.stockMapper.mapToEventAnswer(profile.getStock()));
-        result.put("opinions", this.opinionMapper.mapToEventAnswer(profile.getOpinions()));
+        result.put("stock", this.foodMapper.mapManyToEventAnswer(profile.getAvailable()));
+        result.put("opinions", this.opinionMapper.mapManyToEventAnswer(profile.getOpinions()));
 
         return result;
     }
 
-    public EventAnswerData mapMultipleToEventAnswer(Collection<Profile> profiles) {
+    public EventAnswerData mapManyToEventAnswer(Collection<Profile> profiles) {
         ListEventAnswerData result = new ListEventAnswerData();
 
         profiles.forEach(profile -> result.add(this.mapToEventAnswer(profile)));
@@ -41,10 +42,10 @@ public class ProfileMapper {
     public JPAProfile mapToJPAProfile(Profile profile) {
         JPAProfile jpa = new JPAProfile(profile.getName());
 
-        jpa.setStock(profile.getStock().getFood().stream().map(food -> food.getName()).collect(Collectors.toList()));
+        jpa.setStock(profile.getAvailable().stream().map(food -> food.getName()).collect(Collectors.toList()));
         Map<String, String> jpaOpinions = new HashMap<>();
-        profile.getOpinions().forEach(opinionAbout -> {
-            jpaOpinions.put(opinionAbout.getFood().getName(), opinionAbout.getOpinion().getName());
+        profile.getOpinions().entrySet().forEach(opinionAbout -> {
+            jpaOpinions.put(opinionAbout.getKey().getName(), opinionAbout.getValue().getName());
         });
         jpa.setOpinions(jpaOpinions);
 
@@ -55,13 +56,13 @@ public class ProfileMapper {
         Profile profile = new Profile(jpaProfile.getName());
 
         for (String foodName : jpaProfile.getStock()) {
-            profile.addToStock(new Food(foodName));
+            profile.addToAvailable(new Food(foodName));
         }
 
         Map<String, String> opinions = jpaProfile.getOpinions();
         for (Map.Entry<String, String> entry : opinions.entrySet()) {
             Opinion opinion = this.opinionMapper.fromString(entry.getValue());
-            profile.addOpinionAbout(opinion, new Food(entry.getKey()));
+            profile.addOpinionAbout(new Food(entry.getKey()), opinion);
         }
 
         return profile;

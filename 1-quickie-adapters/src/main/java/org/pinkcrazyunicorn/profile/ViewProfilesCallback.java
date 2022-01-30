@@ -18,6 +18,6 @@ public class ViewProfilesCallback implements EventCallback {
     public EventAnswer call(Map<String, String> data) {
         Collection<Profile> profiles = service.getAll();
 
-        return new EventAnswer("", this.mapper.mapMultipleToEventAnswer(profiles));
+        return new EventAnswer("", this.mapper.mapManyToEventAnswer(profiles));
     }
 }

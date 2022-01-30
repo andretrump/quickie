@@ -2,28 +2,26 @@ package org.pinkcrazyunicorn.profile;
 
 import org.pinkcrazyunicorn.Food;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Optional;
+import java.util.*;
 
 public class Profile {
     private String name;
-    private Stock stock;
-    private Collection<OpinionAbout> opinions;
+    private Set<Food> available;
+    private Map<Food, Opinion> opinionsAbout;
 
-    public Profile(String name, Stock stock, Collection<OpinionAbout> opinions) {
+    public Profile(String name, Set<Food> available, Map<Food, Opinion> opinionsAbout) {
         if (name == null) {
             throw new IllegalArgumentException("Name of Profile must be non-null");
         }
-        if (stock == null) {
-            throw new IllegalArgumentException("Stock of Profile must be non-null");
+        if (available == null) {
+            throw new IllegalArgumentException("Available food of Profile must be non-null");
         }
-        if (opinions == null) {
+        if (opinionsAbout == null) {
             throw new IllegalArgumentException("Opinions of Profile must be non-null");
         }
         this.name = name;
-        this.stock = stock;
-        this.opinions = opinions;
+        this.available = available;
+        this.opinionsAbout = opinionsAbout;
     }
 
     public Profile(String name) {
@@ -31,37 +29,34 @@ public class Profile {
             throw new IllegalArgumentException("Name of Profile must be non-null");
         }
         this.name = name;
-        this.stock = new Stock();
-        this.opinions = new HashSet<>();
+        this.available = new HashSet<>();
+        this.opinionsAbout = new HashMap<>();
     }
 
-    public void addOpinionAbout(Opinion opinion, Food food) {
-        Optional<OpinionAbout> existingOpinion = this.getOpinionAbout(food);
-        if (existingOpinion.isPresent()) {
-            this.opinions.remove(existingOpinion.get());
-        }
-        this.opinions.add(new OpinionAbout(food, opinion));
+    public void addOpinionAbout(Food food, Opinion opinion) {
+        this.opinionsAbout.put(food, opinion);
     }
 
-    public Optional<OpinionAbout> getOpinionAbout(Food food) {
-        for (OpinionAbout opinion : this.opinions) {
-            if (opinion.isAbout(food)) {
-                return Optional.of(opinion);
-            }
+    public Optional<Opinion> getOpinionAbout(Food food) {
+        Opinion maybeOpinion = this.opinionsAbout.get(food);
+        if (maybeOpinion != null) {
+            return Optional.of(maybeOpinion);
         }
         return Optional.empty();
     }
 
-    public void addToStock(Food food) {
-        this.stock.add(food);
+    public void addToAvailable(Food food) {
+        this.available.add(food);
     }
 
-    public boolean isInStock(Food food) {
-        return this.stock.has(food);
+    public boolean isAvailable(Food food) {
+        return this.available.contains(food);
     }
 
-    public void removeFromStock(Food food) {
-        this.stock.remove(food);
+    public void markUnavailable(Food food) {
+        if (this.isAvailable(food)) {
+            this.available.remove(food);
+        }
     }
 
     @Override
@@ -83,11 +78,11 @@ public class Profile {
         return this.name;
     }
 
-    public Stock getStock() {
-        return this.stock;
+    public Collection<Food> getAvailable() {
+        return this.available;
     }
 
-    public Collection<OpinionAbout> getOpinions() {
-        return this.opinions;
+    public Map<Food, Opinion> getOpinions() {
+        return this.opinionsAbout;
     }
 }
