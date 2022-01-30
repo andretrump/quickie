@@ -1,0 +1,16 @@
+\chapter{Beschreibung des Programms}
+Im Internet ist eine Vielzahl an Rezepten zu finden, welche eine große Unterstützung beim Kochen und eine Erweiterung des eigenen kulinarischen Horizonts bieten können. Besonders hochwertig und vergleichsweise einfach in der Zubereitung sind die Rezepte auf der Webseite \url{https://www.hensslers-schnelle-nummer.de/}. Problematisch ist jedoch trotzdem, dass die Rezepte meist sehr verschiedene Zutaten benötigen und damit für jedes Rezept einzeln eingekauft werden müsste. Eine Planung mehrerer Rezepte ist für eine ganze Woche erweist sich allerdings ebenfalls als aufwendig, denn es müssen Rezepte mit übereinstimmenden Zutaten gefunden werden.
+
+Die im Rahmen dieses Programmentwurfs entwickelte Software erfüllt den Nutzen, dass Rezepte mit möglichst großer Übereinstimmung gefunden und betrachtet werden können, was die Planung des Wocheneinkaufes erheblich erleichtert.
+
+\section{Funktionalität}
+Die Rezepte werden vollautomatisch aus der Webseite extrahiert und lokal persistiert. Dabei werden in der Datenbasis bereits vorhandene Rezepte übersprungen, um inkrementelle Aktualisierungen zu ermöglichen. Über eine Kommandozeilenanwendung können die Rezepte einzeln angezeigt, durchsucht und gefiltert werden.
+
+Die Hauptfunktionalität besteht darin, zu jedem Rezept andere Rezepte mit möglichst vielen übereinstimmenden Zutaten zu finden bzw. beliebige Rezepte mit möglichst vielen übereinstimmenden Zutaten zu finden. 
+
+Das Finden der übereinstimmenden Rezepte wird als Matching bezeichnet. Bei diesem Vorgang soll auch berücksichtigt werden, dass bestimmte Zutaten für einen Einkauf und damit auch für das Matching irrelevant sein können, wie beispielsweise Salz oder Pfeffer, da diese ohnehin in fast jedem Rezept vorkommen und daher in der Regel auch vorrätig sind. Daher soll es ermöglicht werden, im Programm zu hinterlegen, welche Zutaten vorrätig sind und daher beim Matching nicht berücksichtigt werden sollen. Da jeder Mensch, was Lebensmittel betrifft, einen individuellen Geschmack besitzt, soll auch dieser beim Matching der Rezepte berücksichtigt werden. Daher soll es für den Benutzer möglich sein, zu jedem Lebensmittel eine Meinung in verschiedenen Stufen von Brechreiz erregender Abneigung bis hin zum Ausbruch größter Glücksgefühle beim Konsum des jeweiligen Lebensmittels zu speichern.
+
+Um eine Verwendung der Software durch verschiedene Nutzer zu ermöglichen, sollen die vorrätigen Lebensmittel sowie die Meinungen des Nutzers zu den verschiedenen Zutaten in Benutzerprofilen organisiert werden.
+
+\section{Technologien}
+Für die Umsetzung wird Java als Programmiersprache und Laufzeitumgebung verwendet. Für die Paketverwaltung wird Maven, für das Parsen des HTML Jsoup und zur Kommunikation mit der Datenbank werden JPA und Hibernate verwendet. Als Datenbankmanagementsystem wird H2 verwendet. Das Projekt befindet sich durch Git bzw. GitHub unter Versionsverwaltung.

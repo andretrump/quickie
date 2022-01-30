@@ -1,0 +1,79 @@
+% ------------------------------------------------------------
+% LaTeX Template für die DHBW zum Schnellstart!
+% Original: https://github.wdf.sap.corp/vtgermany/LaTeX-Template-DHBW
+% ------------------------------------------------------------
+% ---- Präambel mit Angaben zum Dokument
+\input{Inhalt/00_Latex/praeambel}
+
+% ---- Elektronische Version oder Gedruckte Version?
+% ---- Unterschied: Die elektronische Version enthält keinen Platzhalter für die Unterschrift
+\usepackage{ifthen}
+\newboolean{e-Abgabe}
+\setboolean{e-Abgabe}{false}    % false=gedruckte Fassung
+
+% ---- Persönlichen Daten:
+\newcommand{\titelheader}{Programmentwurf}
+\newcommand{\bearbeitende}{Andr\'{e} Trump und Erik Imgrund}
+
+\input{Inhalt/00_Latex/kopfundFusszeile}
+
+% ---- Hilfreiches
+\newcommand{\zB}{z.\,B. }   % "z.B." mit kleinem Leeraum dazwischen (ohne wäre nicht korrekt)
+\newcommand{\dash}{d.\,h. }
+
+\newcommand{\code}[1]{\texttt{#1}} % Ist einfacher zu schreiben als ständig \texttt und erlaubt
+                                   % Änderungen im Nachhinein, wenn man z.B. Inline-Code anders stylen möchte.
+
+% ---- Silbentrennung (falls LaTeX defaults falsch / nicht gewünscht sind)
+\hyphenation{HANA}         % anstatt HA-NA
+\hyphenation{Graph-Script} % anstatt GraphS-cript
+
+% ---- Beginn des Dokuments
+\begin{document}
+\setlength{\parindent}{0pt}              % Keine Paragraphen Einrückung.
+                                         % Dafür haben wir den Abstand zwischen den Paragraphen.
+\setcounter{secnumdepth}{2}              % Nummerierungstiefe fürs Inhaltsverzeichnis
+\setcounter{tocdepth}{1}                 % Tiefe des Inhaltsverzeichnisses. Ggf. so anpassen,
+                                         % dass das Verzeichnis auf eine Seite passt.
+\sffamily                                % Serifenlose Schrift verwenden.
+
+% ---- Vorspann
+% ------ Titelseite
+\singlespacing
+\include{Inhalt/01_Standard/titelseite}  % Titelseite
+\newcounter{savepage}
+\pagenumbering{Roman}                    % Römische Seitenzahlen
+\onehalfspacing
+
+% ------ Inhaltsverzeichnis
+\singlespacing
+\tableofcontents
+
+% ------ Verzeichnisse
+\renewcommand*{\chapterpagestyle}{plain}
+\pagestyle{plain}
+\include{Inhalt/02_Verzeichnisse/abkuerzungen}
+\listoffigures                          % Erzeugen des Abbildungsverzeichnisses 
+\renewcommand{\lstlistlistingname}{Quellcodeverzeichnis}
+\lstlistoflistings                      % Erzeugen des Listenverzeichnisses
+\setcounter{savepage}{\value{page}}
+
+
+% ---- Inhalt der Arbeit
+\cleardoublepage
+\pagenumbering{arabic}                  % Arabische Seitenzahlen für den Hauptteil
+\setlength{\parskip}{0.5\baselineskip}  % Abstand zwischen Absätzen
+\rmfamily
+\renewcommand*{\chapterpagestyle}{scrheadings}
+\pagestyle{scrheadings}
+\onehalfspacing
+\include{Inhalt/03_Inhalt/01_einleitung}
+\include{Inhalt/03_Inhalt/02_ddd}
+
+% ---- Anhang
+\appendix
+%\clearpage
+%\pagenumbering{Roman}  % römische Seitenzahlen für Anhang
+
+\newpage
+\end{document}
