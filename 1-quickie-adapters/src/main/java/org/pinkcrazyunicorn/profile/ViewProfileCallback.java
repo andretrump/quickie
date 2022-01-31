@@ -3,7 +3,10 @@ package org.pinkcrazyunicorn.profile;
 import org.pinkcrazyunicorn.event.EventAnswer;
 import org.pinkcrazyunicorn.event.EventAnswerData;
 import org.pinkcrazyunicorn.event.EventCallback;
+import org.pinkcrazyunicorn.event.EventParameter;
 
+import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -20,9 +23,6 @@ public class ViewProfileCallback implements EventCallback {
     @Override
     public EventAnswer call(Map<String, String> data) {
         String name = data.get("profile-name");
-        if (name == null) {
-            return new EventAnswer("'profile-name' must be specified");
-        }
         Optional<Profile> profile = this.service.getBy(name);
 
         if (profile.isEmpty()) {
@@ -32,5 +32,10 @@ public class ViewProfileCallback implements EventCallback {
         EventAnswerData returnData = mapper.mapToEventAnswer(profile.get());
 
         return new EventAnswer("", returnData);
+    }
+
+    @Override
+    public Collection<EventParameter> getRequiredParameters() {
+        return List.of(EventParameter.Profile);
     }
 }

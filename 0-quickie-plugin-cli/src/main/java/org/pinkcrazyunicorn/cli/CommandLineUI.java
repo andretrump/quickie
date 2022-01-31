@@ -2,16 +2,15 @@ package org.pinkcrazyunicorn.cli;
 
 import org.apache.commons.cli.*;
 import org.pinkcrazyunicorn.*;
-import org.pinkcrazyunicorn.event.Event;
-import org.pinkcrazyunicorn.event.EventAnswer;
-import org.pinkcrazyunicorn.event.EventCallback;
-import org.pinkcrazyunicorn.event.EventType;
+import org.pinkcrazyunicorn.event.*;
 
 import java.util.*;
 
 public class CommandLineUI implements UI {
     private final Map<EventType, EventCallback> eventMap;
     private final List<String> commands;
+    private final Map<String, Collection<EventParameter>> requiredParametersFor;
+    private final Set<EventParameter> requiredParameters;
     private final String[] args;
     private boolean wasRun = false;
 
@@ -19,12 +18,16 @@ public class CommandLineUI implements UI {
         this.eventMap = new HashMap<>();
         this.args = args;
         this.commands = new ArrayList<>();
+        this.requiredParametersFor = new HashMap<>();
+        this.requiredParameters = new HashSet<>();
     }
 
     @Override
     public void registerEvent(EventType event, EventCallback callback) {
         this.eventMap.put(event, callback);
         this.commands.add(event.getName());
+        this.requiredParameters.addAll(callback.getRequiredParameters());
+        this.requiredParametersFor.put(event.getName(), callback.getRequiredParameters());
     }
 
     @Override
@@ -37,6 +40,18 @@ public class CommandLineUI implements UI {
         }
     }
 
+    private Options constructOptions() {
+        Options options = new Options();
+        String commandsString = String.join(", ", commands);
+        options.addOption("c", "command", true, "command to execute, possible values: [" + commandsString + "]");
+
+        for (EventParameter parameter : this.requiredParameters) {
+            options.addOption(parameter.getName().substring(0, 1), parameter.getName(), true, parameter.getDescription());
+        }
+
+        return options;
+    }
+
     @Override
     public Event getUserEvent() {
         if (this.wasRun) {
@@ -44,12 +59,7 @@ public class CommandLineUI implements UI {
         }
         this.wasRun = true;
 
-        Options options = new Options();
-        String commandsString = String.join(", ", commands);
-        options.addOption("n", "profile-name", true, "name of profile to use");
-        options.addOption("f", "food", true, "food");
-        options.addOption("o", "opinion", true, "opinion");
-        options.addOption("c", "command", true, "command to execute, possible values: [" + commandsString + "]");
+        Options options = this.constructOptions();
 
         CommandLineParser parser = new DefaultParser();
         CommandLine cmdLine;
@@ -75,6 +85,11 @@ public class CommandLineUI implements UI {
             return null; // TODO: How to handle program exit?
         }
 
+        if (!this.ensureRequiredParameters(command, cmdLine)) {
+            printHelp(options);
+            return null; // TODO: How to handle program exit?
+        }
+
         Map<String, String> properties = new HashMap<>();
         for (Option option : cmdLine.getOptions()) {
             String optionName = option.getLongOpt();
@@ -82,6 +97,16 @@ public class CommandLineUI implements UI {
         }
 
         return new Event(new EventType(command), properties);
+    }
+
+    private boolean ensureRequiredParameters(String command, CommandLine cmdLine) {
+        for (EventParameter parameter : this.requiredParametersFor.get(command)) {
+            if (!cmdLine.hasOption(parameter.getName())) {
+                System.out.println("'" + parameter.getName() + "' must be specified");
+                return false;
+            }
+        }
+        return true;
     }
 
     private void printHelp(Options options) {
