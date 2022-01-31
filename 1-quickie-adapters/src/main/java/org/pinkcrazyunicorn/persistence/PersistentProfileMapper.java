@@ -43,7 +43,7 @@ public class PersistentProfileMapper {
         Map<String, String> opinions = persistentProfile.getOpinions();
         for (Map.Entry<String, String> entry : opinions.entrySet()) {
             Opinion opinion = this.opinionMapper.fromString(entry.getValue());
-            profile.addOpinionAbout(new Food(entry.getKey()), opinion);
+            profile.setOpinionAbout(new Food(entry.getKey()), opinion);
         }
 
         return profile;

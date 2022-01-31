@@ -10,13 +10,13 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-public class AddAvailableCallback implements EventCallback {
+public class RemoveOpinionCallback implements EventCallback {
     private final ProfileService service;
     private final FoodMapper foodMapper;
 
-    public AddAvailableCallback(ProfileService service) {
+    public RemoveOpinionCallback(ProfileService service) {
         this.service = service;
-        this.foodMapper = new FoodMapper();
+        foodMapper = new FoodMapper();
     }
 
     @Override
@@ -25,9 +25,9 @@ public class AddAvailableCallback implements EventCallback {
         String foodString = data.get("food");
 
         Food food = this.foodMapper.fromString(foodString);
+        this.service.removeOpinionAbout(name, food);
 
-        this.service.addToAvailable(name, food);
-        return new EventAnswer("Successfully added available food");
+        return new EventAnswer("Successfully removed opinion");
     }
 
     @Override

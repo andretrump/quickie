@@ -28,8 +28,10 @@ public class Controller {
         this.ui.registerEvent(new EventType("addProfile"), new AddProfileCallback(profileService));
         this.ui.registerEvent(new EventType("viewProfile"), new ViewProfileCallback(profileService));
         this.ui.registerEvent(new EventType("viewProfiles"), new ViewProfilesCallback(profileService));
-        this.ui.registerEvent(new EventType("addOpinion"), new AddOpinionCallback(profileService));
+        this.ui.registerEvent(new EventType("setOpinion"), new SetOpinionCallback(profileService));
         this.ui.registerEvent(new EventType("addAvailable"), new AddAvailableCallback(profileService));
         this.ui.registerEvent(new EventType("removeProfile"), new RemoveProfileCallback(profileService));
+        this.ui.registerEvent(new EventType("removeOpinion"), new RemoveOpinionCallback(profileService));
+        this.ui.registerEvent(new EventType("removeAvailable"), new RemoveAvailableCallback(profileService));
     }
 }
