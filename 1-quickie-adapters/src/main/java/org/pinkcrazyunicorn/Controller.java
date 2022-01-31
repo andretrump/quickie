@@ -1,12 +1,12 @@
 package org.pinkcrazyunicorn;
 
-import org.pinkcrazyunicorn.profile.AddProfileCallback;
-import org.pinkcrazyunicorn.profile.ProfileService;
-import org.pinkcrazyunicorn.profile.ViewProfileCallback;
+import org.pinkcrazyunicorn.event.Event;
+import org.pinkcrazyunicorn.event.EventType;
+import org.pinkcrazyunicorn.profile.*;
 
 public class Controller {
-    private UI ui;
-    private ProfileService profileService;
+    private final UI ui;
+    private final ProfileService profileService;
 
     public Controller(UI ui, ProfileService profileService) {
         super();
@@ -17,8 +17,19 @@ public class Controller {
         this.registerProfile();
     }
 
+    public void run() {
+        Event event;
+        while ((event = ui.getUserEvent()) != null) {
+            ui.handleEvent(event);
+        }
+    }
+
     private void registerProfile() {
         this.ui.registerEvent(new EventType("addProfile"), new AddProfileCallback(profileService));
         this.ui.registerEvent(new EventType("viewProfile"), new ViewProfileCallback(profileService));
+        this.ui.registerEvent(new EventType("viewProfiles"), new ViewProfilesCallback(profileService));
+        this.ui.registerEvent(new EventType("addOpinion"), new AddOpinionCallback(profileService));
+        this.ui.registerEvent(new EventType("addAvailable"), new AddAvailableCallback(profileService));
+        this.ui.registerEvent(new EventType("removeProfile"), new RemoveProfileCallback(profileService));
     }
 }

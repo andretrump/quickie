@@ -5,11 +5,10 @@ import org.pinkcrazyunicorn.event.EventCallback;
 
 import java.util.Map;
 
-public class AddProfileCallback implements EventCallback {
-    ProfileService service;
+public class RemoveProfileCallback implements EventCallback {
+    private final ProfileService service;
 
-    public AddProfileCallback(ProfileService service) {
-        super();
+    public RemoveProfileCallback(ProfileService service) {
         this.service = service;
     }
 
@@ -20,8 +19,8 @@ public class AddProfileCallback implements EventCallback {
             return new EventAnswer("'profile-name' must be specified");
         }
 
-        this.service.add(name);
+        this.service.remove(name);
 
-        return new EventAnswer("Successfully added profile '" + name + "'");
+        return new EventAnswer("Successfully removed profile '" + name + "'");
     }
 }

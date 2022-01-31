@@ -1,30 +1,45 @@
 package org.pinkcrazyunicorn.profile;
 
-import java.util.HashSet;
+import org.pinkcrazyunicorn.Food;
+
+import java.util.Collection;
+import java.util.Optional;
 
 public class ProfileService {
-    private ProfileRepository repository;
+    private final ProfileRepository repository;
 
     public ProfileService(ProfileRepository repository) {
         super();
         this.repository = repository;
     }
 
-    public void save(Profile profile) {
-        this.repository.save(profile);
-    }
-
     public void add(String name) {
-        Stock stock = new Stock(new HashSet<>());
-        Profile profile = new Profile(name, stock, new HashSet<OpinionAbout>());
-        this.repository.save(profile);
+        this.repository.add(name);
     }
 
     public void remove(String name) {
         this.repository.remove(name);
     }
 
-    public Profile getBy(String name) {
+    public Optional<Profile> getBy(String name) {
         return this.repository.getBy(name);
+    }
+
+    public Collection<Profile> getAll() {
+        return this.repository.getAll();
+    }
+
+    public void addOpinionAbout(String name, Food food, Opinion opinion) {
+        Profile profile = this.getBy(name)
+                .orElseThrow(() -> new IllegalArgumentException("Profile to add opinion to was not found"));
+        profile.addOpinionAbout(food, opinion);
+        this.repository.update(profile);
+    }
+
+    public void addToAvailable(String name, Food food) {
+        Profile profile = this.getBy(name)
+                .orElseThrow(() -> new IllegalArgumentException("Profile to add opinion to was not found"));
+        profile.addToAvailable(food);
+        this.repository.update(profile);
     }
 }
