@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.pinkcrazyunicorn.0-quickie-plugin-scraper</groupId>
+    <groupId>org.pinkcrazyunicorn.quickie.plugin.scraper</groupId>
     <artifactId>0-quickie-plugin-scraper</artifactId>
     <version>1.0</version>
     <packaging>jar</packaging>
@@ -17,7 +17,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.pinkcrazyunicorn.1-quickie-adapters</groupId>
+            <groupId>org.pinkcrazyunicorn.quickie.adapters</groupId>
             <artifactId>1-quickie-adapters</artifactId>
             <version>1.0</version>
             <scope>compile</scope>

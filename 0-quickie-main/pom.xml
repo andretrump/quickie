@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.pinkcrazyunicorn.0-quickie-main</groupId>
+    <groupId>org.pinkcrazyunicorn.quickie.plugins.main</groupId>
     <artifactId>0-quickie-main</artifactId>
     <version>1.0</version>
     <packaging>jar</packaging>
@@ -24,7 +24,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>org.pinkcrazyunicorn.Main</mainClass>
+                            <mainClass>org.pinkcrazyunicorn.quickie.plugins.main.Main</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
@@ -34,13 +34,13 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.pinkcrazyunicorn.0-quickie-plugin-cli</groupId>
+            <groupId>org.pinkcrazyunicorn.quickie.plugins.cli</groupId>
             <artifactId>0-quickie-plugin-cli</artifactId>
             <version>1.0</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>org.pinkcrazyunicorn.0-quickie-plugin-db</groupId>
+            <groupId>org.pinkcrazyunicorn.quickie.plugins.db</groupId>
             <artifactId>0-quickie-plugin-db</artifactId>
             <version>1.0</version>
             <scope>compile</scope>
