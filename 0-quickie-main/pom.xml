@@ -3,24 +3,30 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <groupId>org.pinkcrazyunicorn</groupId>
+        <groupId>org.pinkcrazyunicorn.quickie</groupId>
         <artifactId>quickie</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
+    <groupId>org.pinkcrazyunicorn.0-quickie-main</groupId>
     <artifactId>0-quickie-main</artifactId>
+    <version>1.0</version>
+    <packaging>jar</packaging>
+    <name>0-quickie-main</name>
 
     <build>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.1</version>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.1.0</version>
                 <configuration>
-                    <debug>true</debug>
-                    <source>11</source>
-                    <target>11</target>
+                    <archive>
+                        <manifest>
+                            <mainClass>org.pinkcrazyunicorn.Main</mainClass>
+                        </manifest>
+                    </archive>
                 </configuration>
             </plugin>
         </plugins>
@@ -28,29 +34,16 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.pinkcrazyunicorn</groupId>
+            <groupId>org.pinkcrazyunicorn.0-quickie-plugin-cli</groupId>
             <artifactId>0-quickie-plugin-cli</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>1.0</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>org.pinkcrazyunicorn</groupId>
+            <groupId>org.pinkcrazyunicorn.0-quickie-plugin-db</groupId>
             <artifactId>0-quickie-plugin-db</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>1.0</version>
             <scope>compile</scope>
         </dependency>
-        <dependency>
-            <groupId>org.pinkcrazyunicorn</groupId>
-            <artifactId>0-quickie-plugin-scraper</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.pinkcrazyunicorn</groupId>
-            <artifactId>1-quickie-adapters</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
-
     </dependencies>
 </project>

@@ -5,8 +5,6 @@
     <persistence-unit name="quickie">
         <provider>org.hibernate.ejb.HibernatePersistence</provider>
 
-        <class>org.pinkcrazyunicorn.jpa.JPAProfile</class>
-
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect" />
             <property name="javax.persistence.jdbc.driver" value="org.h2.Driver" />
