@@ -28,7 +28,7 @@ public class OpinionMapper {
     public EventAnswerData mapManyToEventAnswer(Map<Food, Opinion> opinions) {
         MapEventAnswerData result = new MapEventAnswerData();
 
-        for (var opinionAbout : opinions.entrySet()) {
+        for (Map.Entry<Food, Opinion> opinionAbout : opinions.entrySet()) {
             String key = opinionAbout.getKey().getName();
             EventAnswerData value = this.mapToEventAnswer(opinionAbout.getValue());
             result.put(key, value);

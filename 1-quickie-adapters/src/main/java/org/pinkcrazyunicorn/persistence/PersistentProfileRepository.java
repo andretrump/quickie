@@ -12,7 +12,7 @@ public abstract class PersistentProfileRepository implements ProfileRepository {
     protected abstract Optional<? extends PersistentProfile> persistentGetBy(String name);
     protected abstract void persistentAdd(PersistentProfile profile);
     protected abstract void persistentUpdate(PersistentProfile profile);
-    protected abstract void persistentRemove(PersistentProfile jpaProfile);
+    protected abstract void persistentRemove(PersistentProfile profile);
 
     private final PersistentProfileMapper mapper;
 
@@ -31,7 +31,7 @@ public abstract class PersistentProfileRepository implements ProfileRepository {
     @Override
     public Collection<Profile> getAll() {
         return this.persistentGetAll().stream()
-                .map(persistentProfile -> this.mapper.mapFromPersistent(persistentProfile))
+                .map(this.mapper::mapFromPersistent)
                 .collect(Collectors.toList());
     }
 
@@ -56,6 +56,6 @@ public abstract class PersistentProfileRepository implements ProfileRepository {
     @Override
     public void update(Profile profile) {
         PersistentProfile persistent = this.mapper.mapToPersistent(profile);
-        this.persistentAdd(persistent);
+        this.persistentUpdate(persistent);
     }
 }

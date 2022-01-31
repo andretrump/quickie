@@ -6,7 +6,7 @@ import java.util.Collection;
 import java.util.Optional;
 
 public class ProfileService {
-    private ProfileRepository repository;
+    private final ProfileRepository repository;
 
     public ProfileService(ProfileRepository repository) {
         super();
@@ -30,21 +30,15 @@ public class ProfileService {
     }
 
     public void addOpinionAbout(String name, Food food, Opinion opinion) {
-        Optional<Profile> maybeProfile = this.getBy(name);
-        if (maybeProfile.isEmpty()) {
-            throw new IllegalArgumentException("Profile to add opinion to was not found");
-        }
-        Profile profile = maybeProfile.get();
+        Profile profile = this.getBy(name)
+                .orElseThrow(() -> new IllegalArgumentException("Profile to add opinion to was not found"));
         profile.addOpinionAbout(food, opinion);
         this.repository.update(profile);
     }
 
     public void addToAvailable(String name, Food food) {
-        Optional<Profile> maybeProfile = this.getBy(name);
-        if (maybeProfile.isEmpty()) {
-            throw new IllegalArgumentException("Profile to add opinion to was not found");
-        }
-        Profile profile = maybeProfile.get();
+        Profile profile = this.getBy(name)
+                .orElseThrow(() -> new IllegalArgumentException("Profile to add opinion to was not found"));
         profile.addToAvailable(food);
         this.repository.update(profile);
     }

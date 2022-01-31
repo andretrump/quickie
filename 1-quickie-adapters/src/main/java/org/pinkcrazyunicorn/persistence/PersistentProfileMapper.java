@@ -25,11 +25,9 @@ public class PersistentProfileMapper {
         PersistentProfile persistent = this.profileFactory.createEmpty();
 
         persistent.setName(profile.getName());
-        persistent.setAvailable(profile.getAvailable().stream().map(food -> food.getName()).collect(Collectors.toSet()));
+        persistent.setAvailable(profile.getAvailable().stream().map(Food::getName).collect(Collectors.toSet()));
         Map<String, String> opinions = new HashMap<>();
-        profile.getOpinions().entrySet().forEach(opinionAbout -> {
-            opinions.put(opinionAbout.getKey().getName(), opinionAbout.getValue().getName());
-        });
+        profile.getOpinions().forEach((key, value) -> opinions.put(key.getName(), value.getName()));
         persistent.setOpinions(opinions);
 
         return persistent;

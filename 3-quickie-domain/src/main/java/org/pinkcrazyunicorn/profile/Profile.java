@@ -5,9 +5,9 @@ import org.pinkcrazyunicorn.Food;
 import java.util.*;
 
 public class Profile {
-    private String name;
-    private Set<Food> available;
-    private Map<Food, Opinion> opinionsAbout;
+    private final String name;
+    private final Set<Food> available;
+    private final Map<Food, Opinion> opinionsAbout;
 
     public Profile(String name, Set<Food> available, Map<Food, Opinion> opinionsAbout) {
         if (name == null) {

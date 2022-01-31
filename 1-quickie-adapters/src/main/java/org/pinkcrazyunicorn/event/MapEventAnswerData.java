@@ -1,7 +1,6 @@
 package org.pinkcrazyunicorn.event;
 
 import java.util.HashMap;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 public class MapEventAnswerData extends HashMap<String, EventAnswerData> implements EventAnswerData {

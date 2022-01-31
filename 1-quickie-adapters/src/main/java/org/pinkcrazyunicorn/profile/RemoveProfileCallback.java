@@ -7,6 +7,7 @@ import java.util.Map;
 
 public class RemoveProfileCallback implements EventCallback {
     private final ProfileService service;
+
     public RemoveProfileCallback(ProfileService service) {
         this.service = service;
     }

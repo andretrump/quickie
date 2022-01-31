@@ -1,6 +1,5 @@
 package org.pinkcrazyunicorn;
 
-import org.pinkcrazyunicorn.Controller;
 import org.pinkcrazyunicorn.jpa.JPAProfileRepository;
 import org.pinkcrazyunicorn.cli.CommandLineUI;
 import org.pinkcrazyunicorn.jpa.PersistenceManager;

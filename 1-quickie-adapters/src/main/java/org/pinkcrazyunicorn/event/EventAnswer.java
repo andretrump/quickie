@@ -1,12 +1,10 @@
 package org.pinkcrazyunicorn.event;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Optional;
 
 public class EventAnswer {
-    private String title;
-    private Optional<EventAnswerData> data;
+    private final String title;
+    private final Optional<EventAnswerData> data;
 
     public EventAnswer(String title) {
         this.title = title;

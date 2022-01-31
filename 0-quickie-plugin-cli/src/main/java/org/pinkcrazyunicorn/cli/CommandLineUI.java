@@ -8,12 +8,11 @@ import org.pinkcrazyunicorn.event.EventCallback;
 import org.pinkcrazyunicorn.event.EventType;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class CommandLineUI implements UI {
-    private Map<EventType, EventCallback> eventMap;
-    private List<String> commands;
-    private String[] args;
+    private final Map<EventType, EventCallback> eventMap;
+    private final List<String> commands;
+    private final String[] args;
     private boolean wasRun = false;
 
     public CommandLineUI(String[] args) {
@@ -46,7 +45,7 @@ public class CommandLineUI implements UI {
         this.wasRun = true;
 
         Options options = new Options();
-        String commandsString = commands.stream().collect(Collectors.joining(", "));
+        String commandsString = String.join(", ", commands);
         options.addOption("n", "profile-name", true, "name of profile to use");
         options.addOption("f", "food", true, "food");
         options.addOption("o", "opinion", true, "opinion");
@@ -71,7 +70,7 @@ public class CommandLineUI implements UI {
         String command = cmdLine.getOptionValue("command");
 
         if (!commands.contains(command)) {
-            System.out.println("Unknow command " + command);
+            System.out.println("Unknown command " + command);
             printHelp(options);
             return null; // TODO: How to handle program exit?
         }

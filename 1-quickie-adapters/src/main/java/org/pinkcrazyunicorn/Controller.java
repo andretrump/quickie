@@ -5,8 +5,8 @@ import org.pinkcrazyunicorn.event.EventType;
 import org.pinkcrazyunicorn.profile.*;
 
 public class Controller {
-    private UI ui;
-    private ProfileService profileService;
+    private final UI ui;
+    private final ProfileService profileService;
 
     public Controller(UI ui, ProfileService profileService) {
         super();

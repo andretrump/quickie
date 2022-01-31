@@ -21,7 +21,7 @@ public class ProfileMapper {
         MapEventAnswerData result = new MapEventAnswerData();
 
         result.put("name", new StringEventAnswerData(profile.getName()));
-        result.put("stock", this.foodMapper.mapManyToEventAnswer(profile.getAvailable()));
+        result.put("available", this.foodMapper.mapManyToEventAnswer(profile.getAvailable()));
         result.put("opinions", this.opinionMapper.mapManyToEventAnswer(profile.getOpinions()));
 
         return result;
