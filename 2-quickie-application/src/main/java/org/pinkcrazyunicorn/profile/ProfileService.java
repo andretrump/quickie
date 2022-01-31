@@ -29,10 +29,10 @@ public class ProfileService {
         return this.repository.getAll();
     }
 
-    public void addOpinionAbout(String name, Food food, Opinion opinion) {
+    public void setOpinionAbout(String name, Food food, Opinion opinion) {
         Profile profile = this.getBy(name)
                 .orElseThrow(() -> new IllegalArgumentException("Profile to add opinion to was not found"));
-        profile.addOpinionAbout(food, opinion);
+        profile.setOpinionAbout(food, opinion);
         this.repository.update(profile);
     }
 

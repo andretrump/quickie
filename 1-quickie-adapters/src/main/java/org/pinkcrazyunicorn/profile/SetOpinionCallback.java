@@ -10,12 +10,12 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-public class AddOpinionCallback implements EventCallback {
+public class SetOpinionCallback implements EventCallback {
     private final ProfileService service;
     private final FoodMapper foodMapper;
     private final OpinionMapper opinionMapper;
 
-    public AddOpinionCallback(ProfileService service) {
+    public SetOpinionCallback(ProfileService service) {
         this.service = service;
         this.foodMapper = new FoodMapper();
         this.opinionMapper = new OpinionMapper();
@@ -30,7 +30,7 @@ public class AddOpinionCallback implements EventCallback {
         Food food = this.foodMapper.fromString(foodString);
         Opinion opinion = this.opinionMapper.fromString(opinionString);
 
-        this.service.addOpinionAbout(name, food, opinion);
+        this.service.setOpinionAbout(name, food, opinion);
         return new EventAnswer("Successfully added opinion");
     }
 

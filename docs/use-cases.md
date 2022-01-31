@@ -4,13 +4,12 @@
 - Add profile
 - Remove profile
 ## Manage available food
-- View availble food
+- View available food
 - Add food to available food
 - Remove food from available food
 ## Manage opinions
 - View opinions about food
-- Add opinion about food
-- Change opinion about food
+- Set opinion about food
 - Remove opinion about food
 ## Manage recipes
 - Add data source

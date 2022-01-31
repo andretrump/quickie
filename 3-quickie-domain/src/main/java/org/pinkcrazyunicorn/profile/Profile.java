@@ -33,7 +33,7 @@ public class Profile {
         this.opinionsAbout = new HashMap<>();
     }
 
-    public void addOpinionAbout(Food food, Opinion opinion) {
+    public void setOpinionAbout(Food food, Opinion opinion) {
         this.opinionsAbout.put(food, opinion);
     }
 
