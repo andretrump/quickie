@@ -40,8 +40,8 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>org.pinkcrazyunicorn.quickie.plugins.db</groupId>
-            <artifactId>0-quickie-plugin-db</artifactId>
+            <groupId>org.pinkcrazyunicorn.quickie.plugins.jpa</groupId>
+            <artifactId>0-quickie-plugin-jpa</artifactId>
             <version>1.0</version>
             <scope>compile</scope>
         </dependency>
