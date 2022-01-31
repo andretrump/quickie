@@ -42,4 +42,18 @@ public class ProfileService {
         profile.addToAvailable(food);
         this.repository.update(profile);
     }
+
+    public void removeOpinionAbout(String name, Food food) {
+        Profile profile = this.getBy(name)
+                .orElseThrow(() -> new IllegalArgumentException("Profile to add opinion to was not found"));
+        profile.removeOpinionAbout(food);
+        this.repository.update(profile);
+    }
+
+    public void markUnavailable(String name, Food food) {
+        Profile profile = this.getBy(name)
+                .orElseThrow(() -> new IllegalArgumentException("Profile to add opinion to was not found"));
+        profile.markUnavailable(food);
+        this.repository.update(profile);
+    }
 }

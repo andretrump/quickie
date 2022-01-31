@@ -37,6 +37,10 @@ public class Profile {
         this.opinionsAbout.put(food, opinion);
     }
 
+    public void removeOpinionAbout(Food food) {
+        this.opinionsAbout.remove(food);
+    }
+
     public Optional<Opinion> getOpinionAbout(Food food) {
         Opinion maybeOpinion = this.opinionsAbout.get(food);
         if (maybeOpinion != null) {

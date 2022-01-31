@@ -31,5 +31,7 @@ public class Controller {
         this.ui.registerEvent(new EventType("addOpinion"), new AddOpinionCallback(profileService));
         this.ui.registerEvent(new EventType("addAvailable"), new AddAvailableCallback(profileService));
         this.ui.registerEvent(new EventType("removeProfile"), new RemoveProfileCallback(profileService));
+        this.ui.registerEvent(new EventType("removeOpinion"), new RemoveOpinionCallback(profileService));
+        this.ui.registerEvent(new EventType("removeAvailable"), new RemoveAvailableCallback(profileService));
     }
 }
