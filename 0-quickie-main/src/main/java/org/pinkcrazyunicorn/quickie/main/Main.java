@@ -1,4 +1,4 @@
-package org.pinkcrazyunicorn.quickie.plugins.main;
+package org.pinkcrazyunicorn.quickie.main;
 
 import org.pinkcrazyunicorn.quickie.plugins.jpa.JPAProfileRepository;
 import org.pinkcrazyunicorn.quickie.plugins.cli.CommandLineUI;

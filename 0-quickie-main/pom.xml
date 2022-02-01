@@ -24,7 +24,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>org.pinkcrazyunicorn.quickie.plugins.main.Main</mainClass>
+                            <mainClass>org.pinkcrazyunicorn.quickie.main.Main</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
