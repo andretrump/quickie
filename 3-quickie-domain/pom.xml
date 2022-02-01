@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.pinkcrazyunicorn.3-quickie-domain</groupId>
+    <groupId>org.pinkcrazyunicorn.quickie.domain</groupId>
     <artifactId>3-quickie-domain</artifactId>
     <version>1.0</version>
     <packaging>jar</packaging>

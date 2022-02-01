@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.pinkcrazyunicorn.2-quickie-application</groupId>
+    <groupId>org.pinkcrazyunicorn.quickie.application</groupId>
     <artifactId>2-quickie-application</artifactId>
     <version>1.0</version>
     <packaging>jar</packaging>
@@ -17,7 +17,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.pinkcrazyunicorn.3-quickie-domain</groupId>
+            <groupId>org.pinkcrazyunicorn.quickie.domain</groupId>
             <artifactId>3-quickie-domain</artifactId>
             <version>1.0</version>
             <scope>compile</scope>

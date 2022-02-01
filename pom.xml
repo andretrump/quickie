@@ -18,7 +18,7 @@
     <modules>
         <module>0-quickie-main</module>
         <module>0-quickie-plugin-cli</module>
-        <module>0-quickie-plugin-db</module>
+        <module>0-quickie-plugin-jpa</module>
         <module>0-quickie-plugin-scraper</module>
         <module>1-quickie-adapters</module>
         <module>2-quickie-application</module>
@@ -53,7 +53,7 @@
                         <configuration>
                             <transformers>
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>org.pinkcrazyunicorn.Main</mainClass>
+                                    <mainClass>org.pinkcrazyunicorn.quickie.main.Main</mainClass>
                                     <manifestEntries>
                                         <Multi-Release>true</Multi-Release>
                                     </manifestEntries>
