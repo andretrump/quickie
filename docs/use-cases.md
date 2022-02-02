@@ -12,7 +12,6 @@
 - Set opinion about food
 - Remove opinion about food
 ## Manage recipes
-- Add data source
 - Refresh recipes from data source
 ## Main use cases
 - View recipe

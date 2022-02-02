@@ -45,5 +45,11 @@
             <version>1.0</version>
             <scope>compile</scope>
         </dependency>
+        <dependency>
+            <groupId>org.pinkcrazyunicorn.quickie.plugins.scraper</groupId>
+            <artifactId>0-quickie-plugin-scraper</artifactId>
+            <version>1.0</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 </project>

@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.pinkcrazyunicorn.quickie.plugin.scraper</groupId>
+    <groupId>org.pinkcrazyunicorn.quickie.plugins.scraper</groupId>
     <artifactId>0-quickie-plugin-scraper</artifactId>
     <version>1.0</version>
     <packaging>jar</packaging>

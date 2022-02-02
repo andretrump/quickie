@@ -13,6 +13,14 @@ public final class Quantity {
         this.amount = amount;
     }
 
+    public Unit getUnit() {
+        return unit;
+    }
+
+    public double getAmount() {
+        return amount;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

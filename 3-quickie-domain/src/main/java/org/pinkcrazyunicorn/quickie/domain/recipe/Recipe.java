@@ -23,6 +23,22 @@ public class Recipe {
         this.id = UUID.randomUUID();
     }
 
+    public Collection<Ingredient> getIngredients() {
+        return ingredients;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
     @Override
     public String toString() {
         return "Recipe(" + name + ", " + id + ')';
