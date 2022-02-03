@@ -4,6 +4,9 @@ import org.pinkcrazyunicorn.quickie.adapters.persistence.PersistentRecipe;
 import org.pinkcrazyunicorn.quickie.adapters.persistence.PersistentRecipeRepository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
+import javax.persistence.TypedQuery;
+import java.util.Collection;
 
 public class JPARecipeRepository extends PersistentRecipeRepository {
     private final EntityManager entityManager;
@@ -15,6 +18,32 @@ public class JPARecipeRepository extends PersistentRecipeRepository {
 
     @Override
     protected void persistentRefreshRecipe(PersistentRecipe recipe) {
-        // TODO
+        // check existing record
+        if (!(recipe instanceof JPARecipe)) {
+            throw new IllegalArgumentException("JPARecipeRepository only supports JPARecipes");
+        }
+        EntityTransaction transaction = this.entityManager.getTransaction();
+        transaction.begin();
+        // TODO better identification of identical recipe
+        try {
+            TypedQuery<JPARecipe> query = this.entityManager.createQuery("SELECT r from JPARecipe r WHERE r.id = ?1", JPARecipe.class);
+            query.setParameter(1, recipe.getId());
+            int results = query.getResultList().size();
+            if (results == 1) {
+                this.entityManager.merge(recipe);
+            } else {
+                this.entityManager.persist(recipe);
+            }
+            transaction.commit();
+        } catch (Exception e) {
+            transaction.rollback();
+            throw e;
+        }
+    }
+
+    @Override
+    protected Collection<? extends PersistentRecipe> persistentGetAll() {
+        TypedQuery<JPARecipe> query = this.entityManager.createQuery("SELECT r FROM JPARecipe r", JPARecipe.class);
+        return query.getResultList();
     }
 }

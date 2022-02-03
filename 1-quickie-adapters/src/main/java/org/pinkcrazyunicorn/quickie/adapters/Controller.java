@@ -4,6 +4,7 @@ import org.pinkcrazyunicorn.quickie.adapters.event.Event;
 import org.pinkcrazyunicorn.quickie.adapters.event.EventType;
 import org.pinkcrazyunicorn.quickie.adapters.profile.*;
 import org.pinkcrazyunicorn.quickie.adapters.recipe.RefreshFromDatasourceCallback;
+import org.pinkcrazyunicorn.quickie.adapters.recipe.ViewRecipesCallback;
 import org.pinkcrazyunicorn.quickie.application.profile.ProfileService;
 import org.pinkcrazyunicorn.quickie.application.recipe.RecipeService;
 
@@ -39,5 +40,6 @@ public class Controller {
         this.ui.registerEvent(new EventType("removeOpinion"), new RemoveOpinionCallback(profileService));
         this.ui.registerEvent(new EventType("removeAvailable"), new RemoveAvailableCallback(profileService));
         this.ui.registerEvent(new EventType("refreshDatasource"), new RefreshFromDatasourceCallback(recipeService));
+        this.ui.registerEvent(new EventType("viewRecipes"), new ViewRecipesCallback(recipeService));
     }
 }

@@ -39,7 +39,7 @@ public class RefreshFromDatasourceCallback implements EventCallback {
         Datasource datasource = (Datasource) datasourceObject;
         this.service.refreshFrom(datasource);
 
-        return new EventAnswer("TODO: Not tested yet");
+        return new EventAnswer("Refreshed recipes");
     }
 
     @Override
