@@ -20,7 +20,7 @@ public class Henssler implements Datasource {
         // TODO: real implementation
         Ingredient ingredient1 = new Ingredient(new Food("Salz"), new Quantity(new Unit("Prise"), 8));
         Ingredient ingredient2 = new Ingredient(new Food("Nudeln"), new Quantity(new Unit("Gramm"), 500));
-        Recipe recipe = new Recipe(List.of(), "Nudeln mit Salz", "1. Nudeln kochen \n2. Nudeln abgießen \n" +
+        Recipe recipe = new Recipe(List.of(ingredient1, ingredient2), "Nudeln mit Salz", "1. Nudeln kochen \n2. Nudeln abgießen \n" +
                 "3. Nudeln abschrecken \n4. Nudeln in Schüssel füllen \n5. Nudeln salzen");
         return List.of(recipe);
     }

@@ -28,7 +28,6 @@ public class RefreshFromDatasourceCallback implements EventCallback {
         } catch (NoSuchMethodException e) {
             return new EventAnswer("Error: Datasource needs empty constructor");
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
             return new EventAnswer("Error: Class for datasource was not found");
         } catch (InvocationTargetException | IllegalAccessException | InstantiationException e) {
             return new EventAnswer("Error: Error while instantiating datasource");

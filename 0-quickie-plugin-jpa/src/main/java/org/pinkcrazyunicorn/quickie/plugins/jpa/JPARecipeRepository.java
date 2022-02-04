@@ -26,10 +26,8 @@ public class JPARecipeRepository extends PersistentRecipeRepository {
         transaction.begin();
         // TODO better identification of identical recipe
         try {
-            TypedQuery<JPARecipe> query = this.entityManager.createQuery("SELECT r from JPARecipe r WHERE r.id = ?1", JPARecipe.class);
-            query.setParameter(1, recipe.getId());
-            int results = query.getResultList().size();
-            if (results == 1) {
+            PersistentRecipe existing = this.entityManager.find(JPARecipe.class, recipe.getId());
+            if (existing != null) {
                 this.entityManager.merge(recipe);
             } else {
                 this.entityManager.persist(recipe);
@@ -43,7 +41,7 @@ public class JPARecipeRepository extends PersistentRecipeRepository {
 
     @Override
     protected Collection<? extends PersistentRecipe> persistentGetAll() {
-        TypedQuery<JPARecipe> query = this.entityManager.createQuery("SELECT r FROM JPARecipe r", JPARecipe.class);
+        TypedQuery<JPARecipe> query = this.entityManager.createQuery("SELECT r FROM JPARecipe r join fetch r.ingredients", JPARecipe.class);
         return query.getResultList();
     }
 }

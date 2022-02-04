@@ -22,7 +22,7 @@ public class ViewRecipesCallback implements EventCallback {
     @Override
     public EventAnswer call(Map<String, String> data) {
         EventAnswerData eventData = this.mapper.mapManyToEventAnswer(this.service.getAll());
-        return new EventAnswer("", eventData);
+        return new EventAnswer("Recipes:", eventData);
     }
 
     @Override

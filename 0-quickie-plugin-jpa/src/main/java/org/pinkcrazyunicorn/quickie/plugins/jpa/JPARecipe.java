@@ -1,10 +1,10 @@
 package org.pinkcrazyunicorn.quickie.plugins.jpa;
 
+import org.pinkcrazyunicorn.quickie.adapters.persistence.PersistentIngredient;
 import org.pinkcrazyunicorn.quickie.adapters.persistence.PersistentRecipe;
 
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -17,13 +17,7 @@ public class JPARecipe implements PersistentRecipe {
     String name;
 
     @ElementCollection
-    List<String> foods;
-
-    @ElementCollection
-    List<String> units;
-
-    @ElementCollection
-    List<Double> amounts;
+    List<JPAIngredient> ingredients;
 
     public JPARecipe() {
     }
@@ -44,18 +38,8 @@ public class JPARecipe implements PersistentRecipe {
     }
 
     @Override
-    public List<String> getIngredientFoods() {
-        return this.foods;
-    }
-
-    @Override
-    public List<String> getIngredientUnits() {
-        return this.units;
-    }
-
-    @Override
-    public List<Double> getIngredientAmounts() {
-        return this.amounts;
+    public List<JPAIngredient> getIngredients() {
+        return ingredients;
     }
 
     @Override
@@ -74,17 +58,14 @@ public class JPARecipe implements PersistentRecipe {
     }
 
     @Override
-    public void setIngredientFoods(List<String> foods) {
-        this.foods = foods;
-    }
-
-    @Override
-    public void setIngredientUnits(List<String> units) {
-        this.units = units;
-    }
-
-    @Override
-    public void setIngredientAmounts(List<Double> amounts) {
-        this.amounts = amounts;
+    public void setIngredients(List<? extends PersistentIngredient> ingredients) {
+        this.ingredients = new ArrayList<>();
+        for (PersistentIngredient ingredient : ingredients) {
+            if (!(ingredient instanceof JPAIngredient)) {
+                System.out.println("Warning: JPARecipe only supports JPAIngredient. Skipping ingredient");
+                continue;
+            }
+            this.ingredients.add((JPAIngredient) ingredient);
+        }
     }
 }

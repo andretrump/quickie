@@ -17,40 +17,34 @@ public class PersistentRecipeMapper {
     }
 
     public PersistentRecipe mapToPersistent(Recipe recipe) {
-        PersistentRecipe persistent = this.factory.createEmpty();
+        PersistentRecipe persistent = this.factory.createEmptyRecipe();
 
         persistent.setName(recipe.getName());
         persistent.setText(recipe.getText());
         persistent.setId(recipe.getId());
 
-        List<String> foods = new ArrayList<>();
-        List<String> units = new ArrayList<>();
-        List<Double> amounts = new ArrayList<>();
+        List<PersistentIngredient> ingredients = new ArrayList<>();
         for (Ingredient ingredient : recipe.getIngredients()) {
-            foods.add(ingredient.getFood().getName());
+            PersistentIngredient persistentIngredient = this.factory.createEmptyIngredient();
+            persistentIngredient.setFood(ingredient.getFood().getName());
             Quantity quantity = ingredient.getQuantity();
-            units.add(quantity.getUnit().getName());
-            amounts.add(quantity.getAmount());
+            persistentIngredient.setUnit(quantity.getUnit().getName());
+            persistentIngredient.setAmount(quantity.getAmount());
+            ingredients.add(persistentIngredient);
         }
-        persistent.setIngredientFoods(foods);
-        persistent.setIngredientUnits(units);
-        persistent.setIngredientAmounts(amounts);
+        persistent.setIngredients(ingredients);
 
         return persistent;
     }
 
     public Recipe mapFromPersistent(PersistentRecipe persistent) {
-        List<String> foods = persistent.getIngredientFoods();
-        List<String> units = persistent.getIngredientUnits();
-        List<Double> amounts = persistent.getIngredientAmounts();
-        assert amounts.size() == units.size();
-        assert foods.size() == units.size();
+        List<? extends PersistentIngredient> persistentIngredients = persistent.getIngredients();
 
         List<Ingredient> ingredients = new ArrayList<>();
-        for (int i = 0; i < units.size(); i++) {
-            Food food = new Food(foods.get(i));
-            Unit unit = new Unit(units.get(i));
-            Quantity quantity = new Quantity(unit, amounts.get(i));
+        for (PersistentIngredient persistentIngredient : persistentIngredients) {
+            Food food = new Food(persistentIngredient.getFood());
+            Unit unit = new Unit(persistentIngredient.getUnit());
+            Quantity quantity = new Quantity(unit, persistentIngredient.getAmount());
             Ingredient ingredient = new Ingredient(food, quantity);
             ingredients.add(ingredient);
         }

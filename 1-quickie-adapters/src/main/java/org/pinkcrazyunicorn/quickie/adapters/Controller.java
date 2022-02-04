@@ -39,7 +39,7 @@ public class Controller {
         this.ui.registerEvent(new EventType("removeProfile"), new RemoveProfileCallback(profileService));
         this.ui.registerEvent(new EventType("removeOpinion"), new RemoveOpinionCallback(profileService));
         this.ui.registerEvent(new EventType("removeAvailable"), new RemoveAvailableCallback(profileService));
-        this.ui.registerEvent(new EventType("refreshDatasource"), new RefreshFromDatasourceCallback(recipeService));
+        this.ui.registerEvent(new EventType("refreshFromDatasource"), new RefreshFromDatasourceCallback(recipeService));
         this.ui.registerEvent(new EventType("viewRecipes"), new ViewRecipesCallback(recipeService));
     }
 }
