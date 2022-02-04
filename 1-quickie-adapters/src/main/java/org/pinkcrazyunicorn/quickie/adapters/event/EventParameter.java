@@ -4,6 +4,7 @@ public class EventParameter {
     public static EventParameter Profile = new ProfileParameter();
     public static EventParameter Food = new FoodParameter();
     public static EventParameter Opinion = new OpinionParameter();
+    public static EventParameter Datasource = new DatasourceParameter();
 
     private final String name;
     private final String description;
@@ -36,6 +37,12 @@ public class EventParameter {
     private static class OpinionParameter extends EventParameter {
         protected OpinionParameter() {
             super("opinion", "Opinion to be used");
+        }
+    }
+
+    private static class DatasourceParameter extends EventParameter {
+        protected DatasourceParameter() {
+            super("datasource", "Datasource to be refreshed");
         }
     }
 

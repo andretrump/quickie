@@ -17,6 +17,14 @@ public final class Ingredient {
         this.quantity = quantity;
     }
 
+    public Food getFood() {
+        return food;
+    }
+
+    public Quantity getQuantity() {
+        return quantity;
+    }
+
     @Override
     public String toString() {
         return "Ingredient(" + food + ", " + quantity + ")";

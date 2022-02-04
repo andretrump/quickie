@@ -9,18 +9,34 @@ public class Recipe {
     private final String name;
     private final UUID id;
 
-    public Recipe(Collection<Ingredient> ingredients, String text, String name, UUID id) {
+    public Recipe(Collection<Ingredient> ingredients, String name, String text, UUID id) {
         this.ingredients = ingredients;
         this.text = text;
         this.name = name;
         this.id = id;
     }
 
-    public Recipe(Collection<Ingredient> ingredients, String text, String name) {
+    public Recipe(Collection<Ingredient> ingredients, String name, String text) {
         this.ingredients = ingredients;
         this.text = text;
         this.name = name;
         this.id = UUID.randomUUID();
+    }
+
+    public Collection<Ingredient> getIngredients() {
+        return ingredients;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public UUID getId() {
+        return id;
     }
 
     @Override
