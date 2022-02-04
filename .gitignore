@@ -3,4 +3,5 @@
 *.db
 **/target
 *.iml
+**/page-cache
 */dependency-reduced-pom.xml
