@@ -34,9 +34,16 @@ abstract public class Opinion {
         return name.hashCode();
     }
 
+    public abstract double getWeight();
+
     private static class FoodgasmType extends Opinion {
         private FoodgasmType() {
             super("Foodgasm");
+        }
+
+        @Override
+        public double getWeight() {
+            return 3;
         }
     }
 
@@ -44,11 +51,21 @@ abstract public class Opinion {
         private LoveType() {
             super("Love");
         }
+
+        @Override
+        public double getWeight() {
+            return 2;
+        }
     }
 
     private static class LikeType extends Opinion {
         private LikeType() {
             super("Like");
+        }
+
+        @Override
+        public double getWeight() {
+            return 1;
         }
     }
 
@@ -56,11 +73,21 @@ abstract public class Opinion {
         private IndifferentType() {
             super("Indifferent");
         }
+
+        @Override
+        public double getWeight() {
+            return 0;
+        }
     }
 
     private static class DislikeType extends Opinion {
         private DislikeType() {
             super("Dislike");
+        }
+
+        @Override
+        public double getWeight() {
+            return -1;
         }
     }
 
@@ -68,11 +95,21 @@ abstract public class Opinion {
         private HateType() {
             super("Hate");
         }
+
+        @Override
+        public double getWeight() {
+            return -2;
+        }
     }
 
     private static class DealbreakerType extends Opinion {
         private DealbreakerType() {
             super("Dealbreaker");
+        }
+
+        @Override
+        public double getWeight() {
+            return Double.NEGATIVE_INFINITY;
         }
     }
 }

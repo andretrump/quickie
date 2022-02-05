@@ -5,6 +5,7 @@ public class EventParameter {
     public static EventParameter Food = new FoodParameter();
     public static EventParameter Opinion = new OpinionParameter();
     public static EventParameter Datasource = new DatasourceParameter();
+    public static EventParameter RecipeId = new RecipeIdParameter();
 
     private final String name;
     private final String description;
@@ -43,6 +44,12 @@ public class EventParameter {
     private static class DatasourceParameter extends EventParameter {
         protected DatasourceParameter() {
             super("datasource", "Datasource to be refreshed");
+        }
+    }
+
+    private static class RecipeIdParameter extends EventParameter {
+        protected RecipeIdParameter() {
+            super("id", "UUID of recipe to be used");
         }
     }
 

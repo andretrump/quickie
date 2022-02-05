@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 import java.util.Collection;
+import java.util.UUID;
 
 public class JPARecipeRepository extends PersistentRecipeRepository {
     private final EntityManager entityManager;
@@ -43,5 +44,10 @@ public class JPARecipeRepository extends PersistentRecipeRepository {
     protected Collection<? extends PersistentRecipe> persistentGetAll() {
         TypedQuery<JPARecipe> query = this.entityManager.createQuery("SELECT r FROM JPARecipe r join fetch r.ingredients", JPARecipe.class);
         return query.getResultList();
+    }
+
+    @Override
+    protected PersistentRecipe persistentGetBy(UUID id) {
+        return this.entityManager.find(JPARecipe.class, id);
     }
 }
