@@ -98,6 +98,8 @@ public class HensslerScraper {
     }
 
     private Ingredient parseIngredientText(String text) {
+        text = text.replace(", ", "/");
+
         String[] parts = text.split(" ");
         if (parts.length < 3) {
             return null;
@@ -108,7 +110,6 @@ public class HensslerScraper {
 
         double amount;
         String amountString = parts[0]
-                .replace(", ", "/")
                 .replace(",", ".");
         try {
             if (amountString.contains("/")) {
