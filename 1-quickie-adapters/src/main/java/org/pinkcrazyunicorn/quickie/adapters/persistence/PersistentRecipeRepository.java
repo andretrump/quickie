@@ -4,11 +4,14 @@ import org.pinkcrazyunicorn.quickie.domain.recipe.Recipe;
 import org.pinkcrazyunicorn.quickie.domain.recipe.RecipeRepository;
 
 import java.util.Collection;
+import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 public abstract class PersistentRecipeRepository implements RecipeRepository {
     protected abstract void persistentRefreshRecipe(PersistentRecipe recipe);
     protected abstract Collection<? extends PersistentRecipe> persistentGetAll();
+    protected abstract PersistentRecipe persistentGetBy(UUID id);
 
     private final PersistentRecipeMapper mapper;
 
@@ -27,5 +30,14 @@ public abstract class PersistentRecipeRepository implements RecipeRepository {
         return this.persistentGetAll().stream()
                 .map(persistent -> this.mapper.mapFromPersistent(persistent))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public Optional<Recipe> getBy(UUID id) {
+        PersistentRecipe persistent = this.persistentGetBy(id);
+        if (persistent == null) {
+            return Optional.empty();
+        }
+        return Optional.of(this.mapper.mapFromPersistent(persistent));
     }
 }

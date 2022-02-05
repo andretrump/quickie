@@ -1,5 +1,6 @@
 package org.pinkcrazyunicorn.quickie.main;
 
+import org.pinkcrazyunicorn.quickie.application.recipe.MatchingService;
 import org.pinkcrazyunicorn.quickie.application.recipe.RecipeService;
 import org.pinkcrazyunicorn.quickie.domain.recipe.RecipeRepository;
 import org.pinkcrazyunicorn.quickie.plugins.jpa.JPAProfileRepository;
@@ -17,7 +18,12 @@ public class Main {
         RecipeRepository recipeRepository = new JPARecipeRepository(persistenceManager.getManager());
 
         CommandLineUI ui = new CommandLineUI(args);
-        Controller controller = new Controller(ui, new ProfileService(profileRepository), new RecipeService(recipeRepository));
+
+        ProfileService profileService = new ProfileService(profileRepository);
+        RecipeService recipeService = new RecipeService(recipeRepository);
+        MatchingService matchingService = new MatchingService(recipeService, recipeRepository);
+
+        Controller controller = new Controller(ui, profileService, recipeService, matchingService);
         controller.run();
     }
 }

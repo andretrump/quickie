@@ -1,5 +1,6 @@
 package org.pinkcrazyunicorn.quickie.plugins.jpa;
 
+import org.hibernate.annotations.Type;
 import org.pinkcrazyunicorn.quickie.adapters.persistence.PersistentIngredient;
 import org.pinkcrazyunicorn.quickie.adapters.persistence.PersistentRecipe;
 
@@ -11,6 +12,7 @@ import java.util.UUID;
 @Entity
 public class JPARecipe implements PersistentRecipe {
     @Id
+    @Type(type="uuid-char")
     UUID id;
 
     @Lob
