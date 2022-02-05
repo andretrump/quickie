@@ -44,11 +44,17 @@ public class HensslerScraper {
 
     public Recipe getRecipeFrom(String url) throws IOException {
         Document recipePage = this.downloader.getDocument(url);
-        List<Ingredient> ingredients = this.scrapeIngredients(recipePage);
-        String name = this.scrapeTitle(recipePage);
-        String text = this.scrapeInstructions(recipePage);
+        try {
+            List<Ingredient> ingredients = this.scrapeIngredients(recipePage);
+            String name = this.scrapeTitle(recipePage);
+            String text = this.scrapeInstructions(recipePage);
 
-        return new Recipe(ingredients, name, text);
+            return new Recipe(ingredients, name, text);
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+            System.out.println("Error: Recipe could not be parsed. The site changed its' layout most likely");
+        }
+        return null;
     }
 
     private String scrapeTitle(Document recipePage) {
@@ -158,10 +164,9 @@ public class HensslerScraper {
                 );
                 Thread.sleep(200);
             } catch (IOException e) {
-                e.printStackTrace();
-                System.out.println("Could not load " + categoryURL);
+                System.out.println("Warning: Could not load " + categoryURL);
             } catch (InterruptedException e) {
-                System.out.println("Failed to pause after request");
+                System.out.println("Warning: Failed to pause after request");
             }
         }
 

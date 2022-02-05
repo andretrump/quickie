@@ -32,10 +32,8 @@ public class HensslerDatasource implements Datasource {
                 Thread.sleep(200);
             } catch (IOException e) {
                 System.out.println("Warning: Could not load recipe from " + recipeURL);
-                continue;
             } catch (InterruptedException e) {
                 System.out.println("Warning: Could not sleep after request");
-                continue;
             }
         }
 

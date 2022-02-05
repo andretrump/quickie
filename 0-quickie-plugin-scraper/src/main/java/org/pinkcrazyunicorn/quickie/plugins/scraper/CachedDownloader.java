@@ -26,7 +26,7 @@ public class CachedDownloader {
 
         File cacheFile = cachePath.toFile();
         if (cacheFile.exists() && cacheFile.isFile()) {
-            String html = String.join("\n", Files.readAllLines(cachePath));
+            String html = String.join(System.lineSeparator(), Files.readAllLines(cachePath));
             return Jsoup.parse(html);
         }
 
