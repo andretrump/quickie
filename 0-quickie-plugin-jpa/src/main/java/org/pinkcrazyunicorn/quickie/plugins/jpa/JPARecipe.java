@@ -13,7 +13,9 @@ public class JPARecipe implements PersistentRecipe {
     @Id
     UUID id;
 
+    @Lob
     String text;
+
     String name;
 
     @ElementCollection
