@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.UUID;
 
 public class JPARecipeRepository extends PersistentRecipeRepository {
@@ -43,7 +44,7 @@ public class JPARecipeRepository extends PersistentRecipeRepository {
     @Override
     protected Collection<? extends PersistentRecipe> persistentGetAll() {
         TypedQuery<JPARecipe> query = this.entityManager.createQuery("SELECT r FROM JPARecipe r join fetch r.ingredients", JPARecipe.class);
-        return query.getResultList();
+        return new HashSet<>(query.getResultList());
     }
 
     @Override
