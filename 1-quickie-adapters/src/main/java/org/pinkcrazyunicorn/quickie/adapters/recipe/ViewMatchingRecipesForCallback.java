@@ -23,17 +23,16 @@ public class ViewMatchingRecipesForCallback implements EventCallback {
     @Override
     public EventAnswer call(Map<String, String> data) {
         String profileString = data.get(EventParameter.Profile.getName());
-        String recipeIdString = data.get(EventParameter.RecipeId.getName());
+        String origin = data.get(EventParameter.RecipeOrigin.getName());
 
         Optional<Profile> profile = this.profileService.getBy(profileString);
         if (profile.isEmpty()) {
             return new EventAnswer("Error: Need to specify existing profile to be used while matching");
         }
-        UUID id = UUID.fromString(recipeIdString);
 
         return new EventAnswer("matching recipes:",
                 this.recipeMapper.mapManyToEventAnswer(
-                        this.matchingService.getMatchingRecipesFor(id, profile.get())
+                        this.matchingService.getMatchingRecipesFor(origin, profile.get())
                 )
         );
     }
@@ -42,7 +41,7 @@ public class ViewMatchingRecipesForCallback implements EventCallback {
     public Collection<EventParameter> getRequiredParameters() {
         return List.of(
                 EventParameter.Profile,
-                EventParameter.RecipeId
+                EventParameter.RecipeOrigin
         );
     }
 }

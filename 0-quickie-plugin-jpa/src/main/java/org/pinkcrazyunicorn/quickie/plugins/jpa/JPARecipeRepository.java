@@ -28,7 +28,7 @@ public class JPARecipeRepository extends PersistentRecipeRepository {
         transaction.begin();
         // TODO better identification of identical recipe
         try {
-            PersistentRecipe existing = this.entityManager.find(JPARecipe.class, recipe.getId());
+            PersistentRecipe existing = this.entityManager.find(JPARecipe.class, recipe.getOrigin());
             if (existing != null) {
                 this.entityManager.merge(recipe);
             } else {
@@ -48,7 +48,7 @@ public class JPARecipeRepository extends PersistentRecipeRepository {
     }
 
     @Override
-    protected PersistentRecipe persistentGetBy(UUID id) {
-        return this.entityManager.find(JPARecipe.class, id);
+    protected PersistentRecipe persistentGetBy(String origin) {
+        return this.entityManager.find(JPARecipe.class, origin);
     }
 }

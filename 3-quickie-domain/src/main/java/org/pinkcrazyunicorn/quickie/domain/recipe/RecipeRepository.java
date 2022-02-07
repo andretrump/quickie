@@ -8,5 +8,5 @@ public interface RecipeRepository {
     void refreshRecipe(Recipe recipe);
     Collection<Recipe> getAll();
 
-    Optional<Recipe> getBy(UUID id);
+    Optional<Recipe> getBy(String origin);
 }

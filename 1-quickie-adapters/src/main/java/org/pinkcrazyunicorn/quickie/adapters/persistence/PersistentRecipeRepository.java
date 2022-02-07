@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 public abstract class PersistentRecipeRepository implements RecipeRepository {
     protected abstract void persistentRefreshRecipe(PersistentRecipe recipe);
     protected abstract Collection<? extends PersistentRecipe> persistentGetAll();
-    protected abstract PersistentRecipe persistentGetBy(UUID id);
+    protected abstract PersistentRecipe persistentGetBy(String origin);
 
     private final PersistentRecipeMapper mapper;
 
@@ -33,8 +33,8 @@ public abstract class PersistentRecipeRepository implements RecipeRepository {
     }
 
     @Override
-    public Optional<Recipe> getBy(UUID id) {
-        PersistentRecipe persistent = this.persistentGetBy(id);
+    public Optional<Recipe> getBy(String origin) {
+        PersistentRecipe persistent = this.persistentGetBy(origin);
         if (persistent == null) {
             return Optional.empty();
         }
