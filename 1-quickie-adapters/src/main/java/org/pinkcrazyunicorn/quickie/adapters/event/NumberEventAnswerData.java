@@ -7,8 +7,7 @@ public class NumberEventAnswerData<T extends Number> implements EventAnswerData 
         this.data = data;
     }
 
-    @Override
-    public String toJson(int indentationLevel) {
-        return this.data.toString();
+    public T getData() {
+        return data;
     }
 }

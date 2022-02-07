@@ -18,6 +18,7 @@
     <modules>
         <module>0-quickie-main</module>
         <module>0-quickie-plugin-cli</module>
+        <module>0-quickie-plugin-gson</module>
         <module>0-quickie-plugin-jpa</module>
         <module>0-quickie-plugin-scraper</module>
         <module>1-quickie-adapters</module>

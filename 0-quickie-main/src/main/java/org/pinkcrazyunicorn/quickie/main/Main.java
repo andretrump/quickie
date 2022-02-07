@@ -3,6 +3,7 @@ package org.pinkcrazyunicorn.quickie.main;
 import org.pinkcrazyunicorn.quickie.application.recipe.MatchingService;
 import org.pinkcrazyunicorn.quickie.application.recipe.RecipeService;
 import org.pinkcrazyunicorn.quickie.domain.recipe.RecipeRepository;
+import org.pinkcrazyunicorn.quickie.plugins.gson.GSONFormatter;
 import org.pinkcrazyunicorn.quickie.plugins.jpa.JPAProfileRepository;
 import org.pinkcrazyunicorn.quickie.plugins.cli.CommandLineUI;
 import org.pinkcrazyunicorn.quickie.plugins.jpa.JPARecipeRepository;
@@ -16,8 +17,9 @@ public class Main {
         PersistenceManager persistenceManager = PersistenceManager.getInstance();
         ProfileRepository profileRepository = new JPAProfileRepository(persistenceManager.getManager());
         RecipeRepository recipeRepository = new JPARecipeRepository(persistenceManager.getManager());
+        GSONFormatter formatter = new GSONFormatter();
 
-        CommandLineUI ui = new CommandLineUI(args);
+        CommandLineUI ui = new CommandLineUI(args, formatter);
 
         ProfileService profileService = new ProfileService(profileRepository);
         RecipeService recipeService = new RecipeService(recipeRepository);

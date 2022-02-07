@@ -12,9 +12,12 @@ public class CommandLineUI implements UI {
     private final Map<String, Collection<EventParameter>> requiredParametersFor;
     private final Set<EventParameter> requiredParameters;
     private final String[] args;
+    private final EventAnswerDataFormatter formatter;
+
     private boolean wasRun = false;
 
-    public CommandLineUI(String[] args) {
+    public CommandLineUI(String[] args, EventAnswerDataFormatter formatter) {
+        this.formatter = formatter;
         this.eventMap = new HashMap<>();
         this.args = args;
         this.commands = new ArrayList<>();
@@ -36,7 +39,9 @@ public class CommandLineUI implements UI {
         EventAnswer answer = callback.call(event.getData());
         System.out.println(answer.getTitle());
         if (answer.getData().isPresent()) {
-            System.out.println(answer.getData().get().toJson());
+            EventAnswerData data = answer.getData().get();
+            String formatted = this.formatter.convert(data);
+            System.out.println(formatted);
         }
     }
 
