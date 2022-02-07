@@ -3,20 +3,18 @@ package org.pinkcrazyunicorn.quickie.adapters.recipe;
 import org.pinkcrazyunicorn.quickie.adapters.event.EventAnswer;
 import org.pinkcrazyunicorn.quickie.adapters.event.EventCallback;
 import org.pinkcrazyunicorn.quickie.adapters.event.EventParameter;
-import org.pinkcrazyunicorn.quickie.adapters.event.ListEventAnswerData;
 import org.pinkcrazyunicorn.quickie.application.profile.ProfileService;
 import org.pinkcrazyunicorn.quickie.application.recipe.MatchingService;
 import org.pinkcrazyunicorn.quickie.domain.profile.Profile;
-import org.pinkcrazyunicorn.quickie.domain.recipe.Recipe;
 
 import java.util.*;
 
-public class ViewMatchingRecipesFor implements EventCallback {
+public class ViewMatchingRecipesForCallback implements EventCallback {
     private final ProfileService profileService;
     private final MatchingService matchingService;
     private final RecipeMapper recipeMapper;
 
-    public ViewMatchingRecipesFor(ProfileService profileService, MatchingService matchingService) {
+    public ViewMatchingRecipesForCallback(ProfileService profileService, MatchingService matchingService) {
         this.profileService = profileService;
         this.matchingService = matchingService;
         recipeMapper = new RecipeMapper();

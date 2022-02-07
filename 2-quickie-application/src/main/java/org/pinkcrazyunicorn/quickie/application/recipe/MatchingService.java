@@ -27,7 +27,6 @@ public class MatchingService {
             return List.of();
         }
 
-
         Recipe recipe = maybeRecipe.get();
 
         List<Map.Entry<Recipe, Double>> ratedRecipes = new ArrayList<>();

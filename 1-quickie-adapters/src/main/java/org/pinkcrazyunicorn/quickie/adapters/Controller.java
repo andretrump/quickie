@@ -4,7 +4,7 @@ import org.pinkcrazyunicorn.quickie.adapters.event.Event;
 import org.pinkcrazyunicorn.quickie.adapters.event.EventType;
 import org.pinkcrazyunicorn.quickie.adapters.profile.*;
 import org.pinkcrazyunicorn.quickie.adapters.recipe.RefreshFromDatasourceCallback;
-import org.pinkcrazyunicorn.quickie.adapters.recipe.ViewMatchingRecipesFor;
+import org.pinkcrazyunicorn.quickie.adapters.recipe.ViewMatchingRecipesForCallback;
 import org.pinkcrazyunicorn.quickie.adapters.recipe.ViewRecipesCallback;
 import org.pinkcrazyunicorn.quickie.application.profile.ProfileService;
 import org.pinkcrazyunicorn.quickie.application.recipe.MatchingService;
@@ -45,6 +45,6 @@ public class Controller {
         this.ui.registerEvent(new EventType("removeAvailable"), new RemoveAvailableCallback(profileService));
         this.ui.registerEvent(new EventType("refreshFromDatasource"), new RefreshFromDatasourceCallback(recipeService));
         this.ui.registerEvent(new EventType("viewRecipes"), new ViewRecipesCallback(recipeService));
-        this.ui.registerEvent(new EventType("viewMatchingRecipesFor"), new ViewMatchingRecipesFor(profileService, matchingService));
+        this.ui.registerEvent(new EventType("viewMatchingRecipesFor"), new ViewMatchingRecipesForCallback(profileService, matchingService));
     }
 }
