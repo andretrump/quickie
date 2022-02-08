@@ -7,11 +7,7 @@ public class BooleanEventAnswerData implements EventAnswerData {
         this.data = data;
     }
 
-    @Override
-    public String toJson(int indentationLevel) {
-        if (this.data) {
-            return "true";
-        }
-        return "false";
+    public boolean getData() {
+        return data;
     }
 }
