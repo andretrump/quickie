@@ -19,7 +19,7 @@ public class RecipeMapper {
         MapEventAnswerData result = new MapEventAnswerData();
 
         result.put("name", new StringEventAnswerData(recipe.getName()));
-        result.put("id", new StringEventAnswerData(recipe.getId().toString()));
+        result.put("origin", new StringEventAnswerData(recipe.getOrigin()));
 
         ListEventAnswerData ingredients = new ListEventAnswerData();
 

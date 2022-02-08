@@ -21,7 +21,7 @@ public class PersistentRecipeMapper {
 
         persistent.setName(recipe.getName());
         persistent.setText(recipe.getText());
-        persistent.setId(recipe.getId());
+        persistent.setOrigin(recipe.getOrigin());
 
         List<PersistentIngredient> ingredients = new ArrayList<>();
         for (Ingredient ingredient : recipe.getIngredients()) {
@@ -49,6 +49,6 @@ public class PersistentRecipeMapper {
             ingredients.add(ingredient);
         }
 
-        return new Recipe(ingredients, persistent.getName(), persistent.getText(), persistent.getId());
+        return new Recipe(ingredients, persistent.getName(), persistent.getText(), persistent.getOrigin());
     }
 }

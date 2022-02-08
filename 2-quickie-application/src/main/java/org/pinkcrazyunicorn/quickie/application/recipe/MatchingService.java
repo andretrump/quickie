@@ -20,8 +20,8 @@ public class MatchingService {
         this.repository = repository;
     }
 
-    public Collection<Recipe> getMatchingRecipesFor(UUID id, Profile profile) {
-        Optional<Recipe> maybeRecipe = this.repository.getBy(id);
+    public Collection<Recipe> getMatchingRecipesFor(String origin, Profile profile) {
+        Optional<Recipe> maybeRecipe = this.repository.getBy(origin);
         if (maybeRecipe.isEmpty()) {
             System.out.println("Warning: Could not find recipe");
             return List.of();

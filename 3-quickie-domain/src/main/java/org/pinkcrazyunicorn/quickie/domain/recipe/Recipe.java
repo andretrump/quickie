@@ -1,26 +1,18 @@
 package org.pinkcrazyunicorn.quickie.domain.recipe;
 
 import java.util.Collection;
-import java.util.UUID;
 
 public class Recipe {
     private final Collection<Ingredient> ingredients;
     private final String text;
     private final String name;
-    private final UUID id;
+    private final String origin;
 
-    public Recipe(Collection<Ingredient> ingredients, String name, String text, UUID id) {
+    public Recipe(Collection<Ingredient> ingredients, String name, String text, String origin) {
         this.ingredients = ingredients;
         this.text = text;
         this.name = name;
-        this.id = id;
-    }
-
-    public Recipe(Collection<Ingredient> ingredients, String name, String text) {
-        this.ingredients = ingredients;
-        this.text = text;
-        this.name = name;
-        this.id = UUID.randomUUID();
+        this.origin = origin;
     }
 
     public Collection<Ingredient> getIngredients() {
@@ -35,13 +27,13 @@ public class Recipe {
         return name;
     }
 
-    public UUID getId() {
-        return id;
+    public String getOrigin() {
+        return origin;
     }
 
     @Override
     public String toString() {
-        return "Recipe(" + name + ", " + id + ')';
+        return "Recipe(" + name + ", " + origin + ')';
     }
 
     @Override
@@ -51,11 +43,11 @@ public class Recipe {
 
         Recipe recipe = (Recipe) o;
 
-        return id.equals(recipe.id);
+        return origin.equals(recipe.origin);
     }
 
     @Override
     public int hashCode() {
-        return id.hashCode();
+        return origin.hashCode();
     }
 }

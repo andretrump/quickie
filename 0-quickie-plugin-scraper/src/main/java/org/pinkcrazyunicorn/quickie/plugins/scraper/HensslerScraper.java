@@ -49,10 +49,10 @@ public class HensslerScraper {
             String name = this.scrapeTitle(recipePage);
             String text = this.scrapeInstructions(recipePage);
 
-            return new Recipe(ingredients, name, text);
+            return new Recipe(ingredients, name, text, BASE_URL + url);
         } catch (NullPointerException e) {
             e.printStackTrace();
-            System.out.println("Error: Recipe could not be parsed. The site changed its' layout most likely");
+            System.out.println("Error: Recipe could not be parsed. The site changed its layout most likely");
         }
         return null;
     }

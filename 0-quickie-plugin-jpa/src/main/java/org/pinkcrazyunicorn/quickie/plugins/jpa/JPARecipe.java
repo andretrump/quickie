@@ -1,19 +1,16 @@
 package org.pinkcrazyunicorn.quickie.plugins.jpa;
 
-import org.hibernate.annotations.Type;
 import org.pinkcrazyunicorn.quickie.adapters.persistence.PersistentIngredient;
 import org.pinkcrazyunicorn.quickie.adapters.persistence.PersistentRecipe;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 @Entity
 public class JPARecipe implements PersistentRecipe {
     @Id
-    @Type(type="uuid-char")
-    UUID id;
+    String origin;
 
     @Lob
     String text;
@@ -37,8 +34,8 @@ public class JPARecipe implements PersistentRecipe {
     }
 
     @Override
-    public UUID getId() {
-        return this.id;
+    public String getOrigin() {
+        return this.origin;
     }
 
     @Override
@@ -57,8 +54,8 @@ public class JPARecipe implements PersistentRecipe {
     }
 
     @Override
-    public void setId(UUID id) {
-        this.id = id;
+    public void setOrigin(String origin) {
+        this.origin = origin;
     }
 
     @Override
