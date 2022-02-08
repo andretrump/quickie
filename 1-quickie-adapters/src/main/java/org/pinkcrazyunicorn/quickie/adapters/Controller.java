@@ -24,9 +24,9 @@ public class Controller {
         this.recipeService = recipeService;
         this.matchingService = matchingService;
 
-        this.registerProfile();
-        this.registerRecipe();
-        this.registerMatching();
+        this.registerProfileEvents();
+        this.registerRecipeEvents();
+        this.registerMatchingEvents();
     }
 
     public void run() {
@@ -36,7 +36,7 @@ public class Controller {
         }
     }
 
-    private void registerProfile() {
+    private void registerProfileEvents() {
         this.ui.registerEvent(new EventType("addProfile"), new AddProfileCallback(profileService));
         this.ui.registerEvent(new EventType("viewProfile"), new ViewProfileCallback(profileService));
         this.ui.registerEvent(new EventType("viewProfiles"), new ViewProfilesCallback(profileService));
@@ -47,12 +47,12 @@ public class Controller {
         this.ui.registerEvent(new EventType("removeAvailable"), new RemoveAvailableCallback(profileService));
     }
 
-    private void registerRecipe() {
+    private void registerRecipeEvents() {
         this.ui.registerEvent(new EventType("refreshFromDatasource"), new RefreshFromDatasourceCallback(recipeService));
         this.ui.registerEvent(new EventType("viewRecipes"), new ViewRecipesCallback(recipeService));
     }
 
-    private void registerMatching() {
+    private void registerMatchingEvents() {
         this.ui.registerEvent(new EventType("viewMatchingRecipesFor"), new ViewMatchingRecipesForCallback(profileService, matchingService));
     }
 }
