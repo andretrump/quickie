@@ -1,13 +1,11 @@
 package org.pinkcrazyunicorn.quickie.plugins.jpa;
 
-import org.hibernate.annotations.Type;
 import org.pinkcrazyunicorn.quickie.adapters.persistence.PersistentIngredient;
 import org.pinkcrazyunicorn.quickie.adapters.persistence.PersistentRecipe;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 @Entity
 public class JPARecipe implements PersistentRecipe {

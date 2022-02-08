@@ -52,7 +52,7 @@ public class HensslerScraper {
             return new Recipe(ingredients, name, text, BASE_URL + url);
         } catch (NullPointerException e) {
             e.printStackTrace();
-            System.out.println("Error: Recipe could not be parsed. The site changed its' layout most likely");
+            System.out.println("Error: Recipe could not be parsed. The site changed its layout most likely");
         }
         return null;
     }

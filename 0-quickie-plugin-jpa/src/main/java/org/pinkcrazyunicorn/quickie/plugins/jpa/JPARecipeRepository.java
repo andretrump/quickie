@@ -8,7 +8,6 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.UUID;
 
 public class JPARecipeRepository extends PersistentRecipeRepository {
     private final EntityManager entityManager;
@@ -20,13 +19,11 @@ public class JPARecipeRepository extends PersistentRecipeRepository {
 
     @Override
     protected void persistentRefreshRecipe(PersistentRecipe recipe) {
-        // check existing record
         if (!(recipe instanceof JPARecipe)) {
             throw new IllegalArgumentException("JPARecipeRepository only supports JPARecipes");
         }
         EntityTransaction transaction = this.entityManager.getTransaction();
         transaction.begin();
-        // TODO better identification of identical recipe
         try {
             PersistentRecipe existing = this.entityManager.find(JPARecipe.class, recipe.getOrigin());
             if (existing != null) {

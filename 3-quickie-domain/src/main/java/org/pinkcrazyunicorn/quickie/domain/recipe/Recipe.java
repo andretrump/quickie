@@ -1,7 +1,6 @@
 package org.pinkcrazyunicorn.quickie.domain.recipe;
 
 import java.util.Collection;
-import java.util.UUID;
 
 public class Recipe {
     private final Collection<Ingredient> ingredients;
