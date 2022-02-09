@@ -28,13 +28,13 @@ Die Adapterschicht wurde im Module \code{1-quickie-adapters} implementiert und e
     \label{fig:class-diag-adapter}
 \end{figure}
 
-\autoref{fig:class-diag-adapter} zeigt einen Ausschnitt des Klassendiagramms der Adapterschicht in vereinfachter Form. Die Adapterschicht besitzt vier Packages \code{event}, \code{profile}, \code{recipe} und \code{persistence}. Letzteres wurde hier im Sinne der Übersichtlichkeit zunächst ausgespart. 
+\autoref{fig:class-diag-adapter} zeigt einen Ausschnitt des Klassendiagramms der Adapterschicht in vereinfachter Form. Die Adapterschicht besitzt vier Packages: \code{event}, \code{profile}, \code{recipe} und \code{persistence}. Letzteres wurde hier im Sinne der Übersichtlichkeit zunächst nicht dargestellt. 
 
 Das Package \code{event} enthält Pure Fabrication Code, welcher ausschließlich die eventbasierte Kommunikation betrifft. Die Klasse \code{Event} repräsentiert hierbei ein Event, welches von der Benutzeroberfläche gesendet wird und besitzt einen \code{EventType}. Die Klasse \code{EventAnswer} bildet das Resultat der Verarbeitung eines Events ab, welches an die Benutzeroberfläche zurückgeschickt wird. Die Daten, welche mittels der \code{EventAnswer} an die Benutzeroberfläche geschickt werden, werden in einem separaten Objekt gehalten. Hierbei handelt es sich je nach Form der Daten um eine Instanz einer Klasse, welche das Interface \code{EventAnswerData} implementiert. Die Logik, welche beim Auftreten eines bestimmten Events aufgerufen wird, befindet sich in Callback-Klassen. Zu jedem \code{EventType} existiert eine eine entsprechende Callback-Klasse, welche das Interface \code{EventCallback} implementiert.
 
 In den Packages \code{profile} und \code{recipe} werden zum einen die entsprechenden Callback-Klassen implementiert und zum anderen Mapper-Klassen, welche die von der Applikationsschicht erhaltenen Daten in das von der Benutzeroberfläche benötigte Format überführen.
 
-Das zentrale Element der Adapterschicht ist der Controller. Dieser registriert beim Start der Applikation zunächst für jeden \code{EventType} die zugehörige Callback-Klasse Benutzeroberfläche, welche das Interface \code{UI} implementieren muss. Er bildet außerdem den Einstiegspunkt bei der Verarbeitung eines Events von der Benutzeroberfläche, indem er das aufgetretene Event von der Benutzeroberfläche abfragt und dessen Verarbeitung durch den Aufruf der Methode \code{handleEvent} in Gang setzt. 
+Das zentrale Element der Adapterschicht ist der Controller. Dieser registriert beim Start der Applikation zunächst für jeden \code{EventType} die zugehörige Callback-Klasse bei der Benutzeroberfläche, welche das Interface \code{UI} implementieren muss. Er bildet außerdem den Einstiegspunkt bei der Verarbeitung eines Events von der Benutzeroberfläche, indem er das aufgetretene Event von der Benutzeroberfläche abfragt und dessen Verarbeitung durch den Aufruf der Methode \code{handleEvent} in Gang setzt. 
 
 \begin{figure}[ht!]
     \includegraphics[width=0.98\columnwidth]{../diagrams/adapter_sequence.pdf}
