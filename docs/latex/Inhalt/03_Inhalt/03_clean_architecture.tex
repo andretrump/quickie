@@ -4,7 +4,7 @@ In diesem Kapitel wird die Architektur der entwickelten Software beschrieben. Di
 Die Clean Architecture hält neben den vier für dieses Projekt verwendeten Schichten noch eine fünfte bereit, den Abstraction Code. Auf diese Schicht, wurde für dieses Projekt jedoch verzichtet, da für die in der Domäne behandelten Themengebiete \enquote{Kochrezepte} und \enquote{Lebensmittel} kein domänenübergreifendes Wissen notwendig war, welches Teil dieser Schicht hätte sein müssen. 
 
 \section{Schicht 3: Domain}
-Der Domain Code der Software wurde in dieser Schicht implementiert und befindet sich im Module \code{3-quickie-domain}, welches als solches frei von jeglichen Abhängigkeiten ist.
+In dieser Schicht wurde der Domain Code der Software implementiert. Dieser befindet sich im Module \code{3-quickie-domain}, welches als solches frei von jeglichen Abhängigkeiten ist.
 
 Sie enthält als zentrale Schicht der Clean Architecture alle Entities und Value Objects, welche die Enterprise Business Logik der Software implementieren sowie die Interfaces für die zugehörigen Repositories. Ihr genauer Inhalt ist in \autoref{fig:class-diag-domain} dargestellt.
 
@@ -60,4 +60,4 @@ Dieses Plugin wurde im Module \code{0-quickie-plugin-jpa} realisiert die Persist
 In diesem Plugin wird die Extraktion der Rezepte aus den entsprechenden Webseiten im Module \code{0-quickie-plugin-scraper} implementiert. Hierzu werden die Webseiten zunächst durch den \code{CachedDownloader} heruntergeladen. Für das Parsen der Webseiten wird der \code{HensslerScraper} verwendet, welcher die Rezeptdaten aus dem HTML-Text extrahiert. Diese werden dann durch die \code{HensslerDatasource}, welche das in der Applikationsschicht definierte Interface \code{Datasource} implementiert, für die Applikationsschicht zugänglich gemacht. Die Daten durchlaufen damit nicht die Adapterschicht, da der Scraper die Daten problemlos direkt in dem von der Applikationsschicht benötigten Format liefern kann.
 
 \subsection{Main}
-Das Module \code{0-quickie-main} enthält lediglich die Main-Klasse der Applikation, welche alle nötigen Klassen instanziiert und ggf. injected. Zuletzt wird hier auch die Methode \code{run} des Controllers aus der Adapterschicht ausgeführt und somit die Verarbeitung von Events gestartet. Dieses Modul besitzt folglich Abhängigkeiten auf alle anderen Module der Software und befindet sich daher in der äußersten Schicht.
+Das Module \code{0-quickie-main} enthält lediglich die Main-Klasse der Applikation, welche alle nötigen Klassen instanziiert und ggf. injected. Zuletzt wird hier auch die Methode \code{run} des Controllers aus der Adapterschicht ausgeführt und somit die Verarbeitung von Events gestartet. Dieses Modul besitzt folglich Abhängigkeiten auf alle anderen Modules der Software und befindet sich daher in der äußersten Schicht.
