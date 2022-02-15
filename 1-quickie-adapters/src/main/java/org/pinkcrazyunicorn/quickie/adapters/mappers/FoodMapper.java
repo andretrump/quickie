@@ -1,4 +1,4 @@
-package org.pinkcrazyunicorn.quickie.adapters;
+package org.pinkcrazyunicorn.quickie.adapters.mappers;
 
 import org.pinkcrazyunicorn.quickie.adapters.event.EventAnswerData;
 import org.pinkcrazyunicorn.quickie.adapters.event.ListEventAnswerData;

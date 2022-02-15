@@ -1,4 +1,4 @@
-package org.pinkcrazyunicorn.quickie.adapters.recipe;
+package org.pinkcrazyunicorn.quickie.adapters.mappers.recipe;
 
 import org.pinkcrazyunicorn.quickie.adapters.event.*;
 import org.pinkcrazyunicorn.quickie.domain.recipe.Ingredient;

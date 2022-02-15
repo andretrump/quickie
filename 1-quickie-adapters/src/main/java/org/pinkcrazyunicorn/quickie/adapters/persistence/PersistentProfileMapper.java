@@ -1,9 +1,9 @@
 package org.pinkcrazyunicorn.quickie.adapters.persistence;
 
 import org.pinkcrazyunicorn.quickie.domain.Food;
-import org.pinkcrazyunicorn.quickie.adapters.FoodMapper;
+import org.pinkcrazyunicorn.quickie.adapters.mappers.FoodMapper;
 import org.pinkcrazyunicorn.quickie.domain.profile.Opinion;
-import org.pinkcrazyunicorn.quickie.adapters.profile.OpinionMapper;
+import org.pinkcrazyunicorn.quickie.adapters.mappers.profile.OpinionMapper;
 import org.pinkcrazyunicorn.quickie.domain.profile.Profile;
 
 import java.util.HashMap;

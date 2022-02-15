@@ -1,4 +1,4 @@
-package org.pinkcrazyunicorn.quickie.adapters.profile;
+package org.pinkcrazyunicorn.quickie.adapters.callbacks.profile;
 
 import org.pinkcrazyunicorn.quickie.adapters.event.EventAnswer;
 import org.pinkcrazyunicorn.quickie.adapters.event.EventCallback;
@@ -9,10 +9,11 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-public class RemoveProfileCallback implements EventCallback {
-    private final ProfileService service;
+public class AddProfileCallback implements EventCallback {
+    ProfileService service;
 
-    public RemoveProfileCallback(ProfileService service) {
+    public AddProfileCallback(ProfileService service) {
+        super();
         this.service = service;
     }
 
@@ -20,9 +21,9 @@ public class RemoveProfileCallback implements EventCallback {
     public EventAnswer call(Map<String, String> data) {
         String name = data.get("profile-name");
 
-        this.service.remove(name);
+        this.service.add(name);
 
-        return new EventAnswer("Successfully removed profile '" + name + "'");
+        return new EventAnswer("Successfully added profile '" + name + "'");
     }
 
     @Override

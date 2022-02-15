@@ -1,8 +1,9 @@
-package org.pinkcrazyunicorn.quickie.adapters.recipe;
+package org.pinkcrazyunicorn.quickie.adapters.callbacks.recipe;
 
 import org.pinkcrazyunicorn.quickie.adapters.event.EventAnswer;
 import org.pinkcrazyunicorn.quickie.adapters.event.EventCallback;
 import org.pinkcrazyunicorn.quickie.adapters.event.EventParameter;
+import org.pinkcrazyunicorn.quickie.adapters.mappers.recipe.RecipeMapper;
 import org.pinkcrazyunicorn.quickie.application.profile.ProfileService;
 import org.pinkcrazyunicorn.quickie.application.recipe.MatchingService;
 import org.pinkcrazyunicorn.quickie.domain.profile.Profile;
