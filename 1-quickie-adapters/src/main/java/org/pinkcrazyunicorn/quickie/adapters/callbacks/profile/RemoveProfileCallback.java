@@ -1,33 +1,32 @@
-package org.pinkcrazyunicorn.quickie.adapters.profile;
+package org.pinkcrazyunicorn.quickie.adapters.callbacks.profile;
 
 import org.pinkcrazyunicorn.quickie.adapters.event.EventAnswer;
 import org.pinkcrazyunicorn.quickie.adapters.event.EventCallback;
 import org.pinkcrazyunicorn.quickie.adapters.event.EventParameter;
 import org.pinkcrazyunicorn.quickie.application.profile.ProfileService;
-import org.pinkcrazyunicorn.quickie.domain.profile.Profile;
 
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-public class ViewProfilesCallback implements EventCallback {
+public class RemoveProfileCallback implements EventCallback {
     private final ProfileService service;
-    private final ProfileMapper mapper;
 
-    public ViewProfilesCallback(ProfileService service) {
+    public RemoveProfileCallback(ProfileService service) {
         this.service = service;
-        this.mapper = new ProfileMapper();
     }
 
     @Override
     public EventAnswer call(Map<String, String> data) {
-        Collection<Profile> profiles = service.getAll();
+        String name = data.get("profile-name");
 
-        return new EventAnswer("All profiles: ", this.mapper.mapManyToEventAnswer(profiles));
+        this.service.remove(name);
+
+        return new EventAnswer("Successfully removed profile '" + name + "'");
     }
 
     @Override
     public Collection<EventParameter> getRequiredParameters() {
-        return List.of();
+        return List.of(EventParameter.Profile);
     }
 }

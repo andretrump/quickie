@@ -10,10 +10,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.pinkcrazyunicorn.quickie.plugins.main</groupId>
-    <artifactId>0-quickie-main</artifactId>
+    <artifactId>0-quickie-plugin-main</artifactId>
     <version>1.0</version>
     <packaging>jar</packaging>
-    <name>0-quickie-main</name>
+    <name>0-quickie-plugin-main</name>
 
     <build>
         <plugins>
@@ -24,7 +24,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>org.pinkcrazyunicorn.quickie.main.Main</mainClass>
+                            <mainClass>org.pinkcrazyunicorn.quickie.plugins.main.Main</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

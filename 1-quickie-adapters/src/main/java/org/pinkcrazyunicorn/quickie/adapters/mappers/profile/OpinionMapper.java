@@ -1,4 +1,4 @@
-package org.pinkcrazyunicorn.quickie.adapters.profile;
+package org.pinkcrazyunicorn.quickie.adapters.mappers.profile;
 
 import org.pinkcrazyunicorn.quickie.domain.Food;
 import org.pinkcrazyunicorn.quickie.adapters.event.EventAnswerData;

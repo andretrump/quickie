@@ -1,11 +1,11 @@
 package org.pinkcrazyunicorn.quickie.adapters;
 
+import org.pinkcrazyunicorn.quickie.adapters.callbacks.profile.*;
 import org.pinkcrazyunicorn.quickie.adapters.event.Event;
 import org.pinkcrazyunicorn.quickie.adapters.event.EventType;
-import org.pinkcrazyunicorn.quickie.adapters.profile.*;
-import org.pinkcrazyunicorn.quickie.adapters.recipe.RefreshFromDatasourceCallback;
-import org.pinkcrazyunicorn.quickie.adapters.recipe.ViewMatchingRecipesForCallback;
-import org.pinkcrazyunicorn.quickie.adapters.recipe.ViewRecipesCallback;
+import org.pinkcrazyunicorn.quickie.adapters.callbacks.recipe.RefreshFromDatasourceCallback;
+import org.pinkcrazyunicorn.quickie.adapters.callbacks.recipe.ViewMatchingRecipesForCallback;
+import org.pinkcrazyunicorn.quickie.adapters.callbacks.recipe.ViewRecipesCallback;
 import org.pinkcrazyunicorn.quickie.application.profile.ProfileService;
 import org.pinkcrazyunicorn.quickie.application.recipe.MatchingService;
 import org.pinkcrazyunicorn.quickie.application.recipe.RecipeService;

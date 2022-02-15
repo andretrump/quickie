@@ -1,4 +1,4 @@
-package org.pinkcrazyunicorn.quickie.main;
+package org.pinkcrazyunicorn.quickie.plugins.main;
 
 import org.pinkcrazyunicorn.quickie.application.recipe.MatchingService;
 import org.pinkcrazyunicorn.quickie.application.recipe.RecipeService;
