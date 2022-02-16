@@ -71,6 +71,14 @@
 \include{Inhalt/03_Inhalt/02_ddd}
 \include{Inhalt/03_Inhalt/03_clean_architecture}
 
+% ---- Literaturverzeichnis
+\cleardoublepage
+\renewcommand*{\chapterpagestyle}{plain}
+\pagestyle{plain}
+\pagenumbering{Roman}                   % Römische Seitenzahlen
+\setcounter{page}{\numexpr\value{savepage}+1}
+\printbibliography[title=Literaturverzeichnis]
+
 % ---- Anhang
 \appendix
 %\clearpage
