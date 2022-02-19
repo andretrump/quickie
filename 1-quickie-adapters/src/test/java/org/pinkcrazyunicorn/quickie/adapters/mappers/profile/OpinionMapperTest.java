@@ -1,58 +1,44 @@
 package org.pinkcrazyunicorn.quickie.adapters.mappers.profile;
 
-import org.junit.Test;
+import static org.assertj.core.api.Assertions.*;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.pinkcrazyunicorn.quickie.domain.profile.Opinion;
 
+import java.util.stream.Stream;
+
 public class OpinionMapperTest {
-    @Test
-    public void testFoodgasmFromString() {
-        performFromStringTest("Foodgasm", Opinion.Foodgasm);
-    }
-
-    @Test
-    public void testLoveFromString() {
-        performFromStringTest("Love", Opinion.Love);
-    }
-
-    @Test
-    public void testLikeFromString() {
-        performFromStringTest("Like", Opinion.Like);
-    }
-
-    @Test
-    public void testIndifferentFromString() {
-        performFromStringTest("Indifferent", Opinion.Indifferent);
-    }
-
-    @Test
-    public void testDislikeFromString() {
-        performFromStringTest("Dislike", Opinion.Dislike);
-    }
-
-    @Test
-    public void testHateFromString() {
-        performFromStringTest("Hate", Opinion.Hate);
-    }
-
-    @Test
-    public void testDealbreakerFromString() {
-        performFromStringTest("Dealbreaker", Opinion.Dealbreaker);
-    }
-
-    @Test
-    public void testNonexistentFromString() {
-        OpinionMapper codeUnderTest = new OpinionMapper();
-
-        Opinion actual = codeUnderTest.fromString("foodgasm");
-
-        assert actual == null;
-    }
-
-    private void performFromStringTest(String from, Opinion shouldBe) {
+    @ParameterizedTest
+    @ValueSource(strings = {"foodgasm", "ReallyLike", "Nothing", "Null", "Dont'tKnow"})
+    public void testNonexistentFromString(String from) {
         OpinionMapper codeUnderTest = new OpinionMapper();
 
         Opinion actual = codeUnderTest.fromString(from);
 
-        assert actual.equals(shouldBe);
+        assertThat(actual).isNull();
+    }
+
+    @ParameterizedTest
+    @MethodSource("provideSuccessfulPairs")
+    public void testSuccessfulFromString(String from, Opinion shouldBe) {
+        OpinionMapper codeUnderTest = new OpinionMapper();
+
+        Opinion actual = codeUnderTest.fromString(from);
+
+        assertThat(actual).isEqualTo(shouldBe);
+    }
+
+    private static Stream<Arguments> provideSuccessfulPairs() {
+        return Stream.of(
+                Arguments.of("Foodgasm", Opinion.Foodgasm),
+                Arguments.of("Love", Opinion.Love),
+                Arguments.of("Like", Opinion.Like),
+                Arguments.of("Indifferent", Opinion.Indifferent),
+                Arguments.of("Dislike", Opinion.Dislike),
+                Arguments.of("Hate", Opinion.Hate),
+                Arguments.of("Dealbreaker", Opinion.Dealbreaker)
+        );
     }
 }
