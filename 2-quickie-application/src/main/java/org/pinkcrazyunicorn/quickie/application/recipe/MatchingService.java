@@ -69,7 +69,7 @@ public class MatchingService {
         if (Double.isInfinite(max) || Double.isInfinite(min)) {
             return 0;
         }
-        return (max + min) / Opinion.Dealbreaker.getWeight();
+        return (max + min) / Opinion.Dislike.getWeight();
     }
 
     private double getIntersectionOverUnion(Recipe recipe, Recipe comparing) {
