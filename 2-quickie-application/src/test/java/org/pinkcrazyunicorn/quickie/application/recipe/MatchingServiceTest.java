@@ -20,9 +20,9 @@ public class MatchingServiceTest {
     @MethodSource("getTestData")
     public void testGetMatchingRecipesFor(Profile profile, RecipeRepository repository, RecipeService recipeService,
                                           Collection<Recipe> expected, String origin, Collection<Object> toVerify) {
-        MatchingService service = new MatchingService(recipeService, repository);
+        MatchingService codeUnderTest = new MatchingService(recipeService, repository);
 
-        Collection<Recipe> actual = service.getMatchingRecipesFor(origin, profile);
+        Collection<Recipe> actual = codeUnderTest.getMatchingRecipesFor(origin, profile);
 
         assertThat(actual).hasSize(expected.size())
                 .containsAll(expected);

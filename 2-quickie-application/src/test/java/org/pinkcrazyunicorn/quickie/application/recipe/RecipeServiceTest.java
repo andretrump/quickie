@@ -21,9 +21,9 @@ public class RecipeServiceTest {
         EasyMock.expect(repository.getAll()).andReturn(recipes);
 
         EasyMock.replay(repository);
-        RecipeService service = new RecipeService(repository);
+        RecipeService codeUnderTest = new RecipeService(repository);
 
-        Collection<Recipe> actual = service.getAll();
+        Collection<Recipe> actual = codeUnderTest.getAll();
 
         assertThat(actual).hasSize(recipes.size());
         for (Recipe recipe : recipes) {
@@ -45,9 +45,9 @@ public class RecipeServiceTest {
         EasyMock.replay(repository);
         EasyMock.replay(source);
 
-        RecipeService service = new RecipeService(repository);
+        RecipeService codeUnderTest = new RecipeService(repository);
 
-        service.refreshFrom(source);
+        codeUnderTest.refreshFrom(source);
 
         for (Recipe recipe : recipes) {
             EasyMock.verify(recipe);

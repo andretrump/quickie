@@ -20,9 +20,9 @@ public class ProfileServiceTest {
         repository.add("Default");
 
         EasyMock.replay(repository);
-        ProfileService service = new ProfileService(repository);
+        ProfileService codeUnderTest = new ProfileService(repository);
 
-        service.add("Default");
+        codeUnderTest.add("Default");
 
         EasyMock.verify(repository);
     }
@@ -33,9 +33,9 @@ public class ProfileServiceTest {
         repository.remove("Default");
 
         EasyMock.replay(repository);
-        ProfileService service = new ProfileService(repository);
+        ProfileService codeUnderTest = new ProfileService(repository);
 
-        service.remove("Default");
+        codeUnderTest.remove("Default");
 
         EasyMock.verify(repository);
     }
@@ -47,9 +47,9 @@ public class ProfileServiceTest {
         EasyMock.expect(repository.getBy("Default")).andReturn(Optional.of(profile));
 
         EasyMock.replay(repository);
-        ProfileService service = new ProfileService(repository);
+        ProfileService codeUnderTest = new ProfileService(repository);
 
-        Optional<Profile> actual = service.getBy("Default");
+        Optional<Profile> actual = codeUnderTest.getBy("Default");
 
         EasyMock.verify(repository);
         assertThat(actual).isPresent().hasValue(profile);
@@ -61,9 +61,9 @@ public class ProfileServiceTest {
         EasyMock.expect(repository.getBy("Default")).andReturn(Optional.empty());
 
         EasyMock.replay(repository);
-        ProfileService service = new ProfileService(repository);
+        ProfileService codeUnderTest = new ProfileService(repository);
 
-        Optional<Profile> actual = service.getBy("Default");
+        Optional<Profile> actual = codeUnderTest.getBy("Default");
 
         EasyMock.verify(repository);
         assertThat(actual).isEmpty();
@@ -78,9 +78,9 @@ public class ProfileServiceTest {
         EasyMock.expect(repository.getAll()).andReturn(List.of(profile1, profile2, profile3));
 
         EasyMock.replay(repository);
-        ProfileService service = new ProfileService(repository);
+        ProfileService codeUnderTest = new ProfileService(repository);
 
-        Collection<Profile> actual = service.getAll();
+        Collection<Profile> actual = codeUnderTest.getAll();
 
         EasyMock.verify(repository);
         assertThat(actual)
@@ -96,9 +96,9 @@ public class ProfileServiceTest {
         EasyMock.expect(repository.getAll()).andReturn(List.of());
 
         EasyMock.replay(repository);
-        ProfileService service = new ProfileService(repository);
+        ProfileService codeUnderTest = new ProfileService(repository);
 
-        Collection<Profile> actual = service.getAll();
+        Collection<Profile> actual = codeUnderTest.getAll();
 
         EasyMock.verify(repository);
         assertThat(actual)
@@ -116,9 +116,9 @@ public class ProfileServiceTest {
         EasyMock.expect(repository.getBy("Default")).andReturn(Optional.of(profile));
 
         EasyMock.replay(repository);
-        ProfileService service = new ProfileService(repository);
+        ProfileService codeUnderTest = new ProfileService(repository);
 
-        service.setOpinionAbout("Default", food, opinion);
+        codeUnderTest.setOpinionAbout("Default", food, opinion);
 
         EasyMock.verify(repository);
     }
@@ -131,10 +131,10 @@ public class ProfileServiceTest {
         EasyMock.expect(repository.getBy("Default")).andReturn(Optional.empty());
 
         EasyMock.replay(repository);
-        ProfileService service = new ProfileService(repository);
+        ProfileService codeUnderTest = new ProfileService(repository);
 
         assertThatThrownBy(() -> {
-            service.setOpinionAbout("Default", food, opinion);
+            codeUnderTest.setOpinionAbout("Default", food, opinion);
         }).isInstanceOf(IllegalArgumentException.class);
 
         EasyMock.verify(repository);
@@ -150,9 +150,9 @@ public class ProfileServiceTest {
         EasyMock.expect(repository.getBy("Default")).andReturn(Optional.of(profile));
 
         EasyMock.replay(repository);
-        ProfileService service = new ProfileService(repository);
+        ProfileService codeUnderTest = new ProfileService(repository);
 
-        service.addToAvailable("Default", food);
+        codeUnderTest.addToAvailable("Default", food);
 
         EasyMock.verify(repository);
     }
@@ -164,10 +164,10 @@ public class ProfileServiceTest {
         EasyMock.expect(repository.getBy("Default")).andReturn(Optional.empty());
 
         EasyMock.replay(repository);
-        ProfileService service = new ProfileService(repository);
+        ProfileService codeUnderTest = new ProfileService(repository);
 
         assertThatThrownBy(() -> {
-            service.addToAvailable("Default", food);
+            codeUnderTest.addToAvailable("Default", food);
         }).isInstanceOf(IllegalArgumentException.class);
 
         EasyMock.verify(repository);
@@ -183,9 +183,9 @@ public class ProfileServiceTest {
         EasyMock.expect(repository.getBy("Default")).andReturn(Optional.of(profile));
 
         EasyMock.replay(repository);
-        ProfileService service = new ProfileService(repository);
+        ProfileService codeUnderTest = new ProfileService(repository);
 
-        service.removeOpinionAbout("Default", food);
+        codeUnderTest.removeOpinionAbout("Default", food);
 
         EasyMock.verify(repository);
     }
@@ -197,10 +197,10 @@ public class ProfileServiceTest {
         EasyMock.expect(repository.getBy("Default")).andReturn(Optional.empty());
 
         EasyMock.replay(repository);
-        ProfileService service = new ProfileService(repository);
+        ProfileService codeUnderTest = new ProfileService(repository);
 
         assertThatThrownBy(() -> {
-            service.removeOpinionAbout("Default", food);
+            codeUnderTest.removeOpinionAbout("Default", food);
         }).isInstanceOf(IllegalArgumentException.class);
 
         EasyMock.verify(repository);
@@ -216,9 +216,9 @@ public class ProfileServiceTest {
         EasyMock.expect(repository.getBy("Default")).andReturn(Optional.of(profile));
 
         EasyMock.replay(repository);
-        ProfileService service = new ProfileService(repository);
+        ProfileService codeUnderTest = new ProfileService(repository);
 
-        service.markUnavailable("Default", food);
+        codeUnderTest.markUnavailable("Default", food);
 
         EasyMock.verify(repository);
     }
@@ -230,10 +230,10 @@ public class ProfileServiceTest {
         EasyMock.expect(repository.getBy("Default")).andReturn(Optional.empty());
 
         EasyMock.replay(repository);
-        ProfileService service = new ProfileService(repository);
+        ProfileService codeUnderTest = new ProfileService(repository);
 
         assertThatThrownBy(() -> {
-            service.markUnavailable("Default", food);
+            codeUnderTest.markUnavailable("Default", food);
         }).isInstanceOf(IllegalArgumentException.class);
 
         EasyMock.verify(repository);

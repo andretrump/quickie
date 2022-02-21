@@ -21,7 +21,7 @@ public class OpinionMapperTest {
     }
 
     @ParameterizedTest
-    @MethodSource("provideSuccessfulPairs")
+    @MethodSource("getSuccessfulPairs")
     public void testSuccessfulFromString(String from, Opinion shouldBe) {
         OpinionMapper codeUnderTest = new OpinionMapper();
 
@@ -30,7 +30,7 @@ public class OpinionMapperTest {
         assertThat(actual).isEqualTo(shouldBe);
     }
 
-    private static Stream<Arguments> provideSuccessfulPairs() {
+    private static Stream<Arguments> getSuccessfulPairs() {
         return Stream.of(
                 Arguments.of("Foodgasm", Opinion.Foodgasm),
                 Arguments.of("Love", Opinion.Love),
