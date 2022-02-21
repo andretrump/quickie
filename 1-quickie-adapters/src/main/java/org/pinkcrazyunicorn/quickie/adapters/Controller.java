@@ -1,6 +1,7 @@
 package org.pinkcrazyunicorn.quickie.adapters;
 
 import org.pinkcrazyunicorn.quickie.adapters.callbacks.profile.*;
+import org.pinkcrazyunicorn.quickie.adapters.callbacks.recipe.ViewRecipeCallback;
 import org.pinkcrazyunicorn.quickie.adapters.event.Event;
 import org.pinkcrazyunicorn.quickie.adapters.event.EventType;
 import org.pinkcrazyunicorn.quickie.adapters.callbacks.recipe.RefreshFromDatasourceCallback;
@@ -50,6 +51,7 @@ public class Controller {
     private void registerRecipeEvents() {
         this.ui.registerEvent(new EventType("refreshFromDatasource"), new RefreshFromDatasourceCallback(recipeService));
         this.ui.registerEvent(new EventType("viewRecipes"), new ViewRecipesCallback(recipeService));
+        this.ui.registerEvent(new EventType("viewRecipe"), new ViewRecipeCallback(recipeService));
     }
 
     private void registerMatchingEvents() {

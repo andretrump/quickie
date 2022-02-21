@@ -4,6 +4,7 @@ import org.pinkcrazyunicorn.quickie.domain.recipe.Recipe;
 import org.pinkcrazyunicorn.quickie.domain.recipe.RecipeRepository;
 
 import java.util.Collection;
+import java.util.Optional;
 
 public class RecipeService {
     private final RecipeRepository repository;
@@ -21,5 +22,9 @@ public class RecipeService {
 
     public Collection<Recipe> getAll() {
         return this.repository.getAll();
+    }
+
+    public Optional<Recipe> getBy(String origin) {
+        return this.repository.getBy(origin);
     }
 }
