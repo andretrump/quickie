@@ -106,7 +106,7 @@ public class ProfileServiceTest {
     }
 
     @Test
-    public void shouldSetOpinionAbout() {
+    public void shouldSetOpinionAboutFood() {
         ProfileRepository repository = EasyMock.createMock(ProfileRepository.class);
         Profile profile = EasyMock.createMock(Profile.class);
         Food food = new Food("Food");
@@ -124,7 +124,7 @@ public class ProfileServiceTest {
     }
 
     @Test
-    public void ShouldThrowWhenSettingOpinionForInvalidProfile() {
+    public void shouldErrWhenSettingOpinionForInvalidProfile() {
         ProfileRepository repository = EasyMock.createMock(ProfileRepository.class);
         Food food = new Food("Food");
         Opinion opinion = EasyMock.createMock(Opinion.class);
@@ -158,7 +158,7 @@ public class ProfileServiceTest {
     }
 
     @Test
-    public void shouldThrowWhenMarkingFoodAsAvailableForInvalidProfile() {
+    public void shouldErrWhenMarkingFoodAsAvailableForInvalidProfile() {
         ProfileRepository repository = EasyMock.createMock(ProfileRepository.class);
         Food food = new Food("Food");
         EasyMock.expect(repository.getBy("Default")).andReturn(Optional.empty());
@@ -191,7 +191,7 @@ public class ProfileServiceTest {
     }
 
     @Test
-    public void shouldThrowWhenRemovingOpinionForInvalidProfile() {
+    public void shouldErrWhenRemovingOpinionForInvalidProfile() {
         ProfileRepository repository = EasyMock.createMock(ProfileRepository.class);
         Food food = new Food("Food");
         EasyMock.expect(repository.getBy("Default")).andReturn(Optional.empty());
@@ -224,7 +224,7 @@ public class ProfileServiceTest {
     }
 
     @Test
-    public void shouldThrowWhenMarkingFoodAsUnavailableForInvalidProfile() {
+    public void shouldErrWhenMarkingFoodAsUnavailableForInvalidProfile() {
         ProfileRepository repository = EasyMock.createMock(ProfileRepository.class);
         Food food = new Food("Food");
         EasyMock.expect(repository.getBy("Default")).andReturn(Optional.empty());

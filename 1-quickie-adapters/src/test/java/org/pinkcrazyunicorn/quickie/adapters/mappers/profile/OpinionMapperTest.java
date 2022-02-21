@@ -12,7 +12,7 @@ import java.util.stream.Stream;
 public class OpinionMapperTest {
     @ParameterizedTest
     @ValueSource(strings = {"foodgasm", "ReallyLike", "Nothing", "Null", "Dont'tKnow"})
-    public void shouldNotGetInvalidOpinionFromString(String from) {
+    public void shouldNotGetOpinionFromInvalidString(String from) {
         OpinionMapper codeUnderTest = new OpinionMapper();
 
         Opinion actual = codeUnderTest.fromString(from);
