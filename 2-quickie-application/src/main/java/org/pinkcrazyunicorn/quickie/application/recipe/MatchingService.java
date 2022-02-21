@@ -12,16 +12,14 @@ import java.util.stream.Collectors;
 
 public class MatchingService {
     private final RecipeService recipeService;
-    private final RecipeRepository repository;
 
-    public MatchingService(RecipeService recipeService, RecipeRepository repository) {
+    public MatchingService(RecipeService recipeService) {
         super();
         this.recipeService = recipeService;
-        this.repository = repository;
     }
 
     public Collection<Recipe> getMatchingRecipesFor(String origin, Profile profile) {
-        Optional<Recipe> maybeRecipe = this.repository.getBy(origin);
+        Optional<Recipe> maybeRecipe = this.recipeService.getBy(origin);
         if (maybeRecipe.isEmpty()) {
             System.out.println("Warning: Could not find recipe");
             return List.of();

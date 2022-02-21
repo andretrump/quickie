@@ -18,9 +18,9 @@ import java.util.stream.Stream;
 public class MatchingServiceTest {
     @ParameterizedTest
     @MethodSource("getTestData")
-    public void shouldFindExpectedMatchingRecipes(Profile profile, RecipeRepository repository, RecipeService recipeService,
+    public void shouldFindExpectedMatchingRecipes(Profile profile, RecipeService recipeService,
                                           Collection<Recipe> expected, String origin, Collection<Object> toVerify) {
-        MatchingService codeUnderTest = new MatchingService(recipeService, repository);
+        MatchingService codeUnderTest = new MatchingService(recipeService);
 
         Collection<Recipe> actual = codeUnderTest.getMatchingRecipesFor(origin, profile);
 
@@ -59,14 +59,6 @@ public class MatchingServiceTest {
         EasyMock.expect(dealbreakerRecipe.getIngredients()).andReturn(List.of(commonIngredient, dealbreakerIngredient)).atLeastOnce();
         EasyMock.replay(dealbreakerRecipe);
 
-        RecipeRepository repository = EasyMock.createMock(RecipeRepository.class);
-        EasyMock.expect(repository.getBy("Default")).andReturn(Optional.of(recipe)).atLeastOnce();
-        EasyMock.replay(repository);
-
-        RecipeRepository notFoundRepository = EasyMock.createMock(RecipeRepository.class);
-        EasyMock.expect(notFoundRepository.getBy("Invalid")).andReturn(Optional.empty());
-        EasyMock.replay(notFoundRepository);
-
         EasyMock.replay(profile);
 
         RecipeService recipeService1 = EasyMock.createMock(RecipeService.class);
@@ -75,6 +67,7 @@ public class MatchingServiceTest {
                 recipe, recipe, recipe, recipe, recipe,
                 recipe, recipe, recipe, recipe, recipe
         ));
+        EasyMock.expect(recipeService1.getBy("Default")).andReturn(Optional.of(recipe));
         EasyMock.replay(recipeService1);
 
         RecipeService recipeService2 = EasyMock.createMock(RecipeService.class);
@@ -83,6 +76,7 @@ public class MatchingServiceTest {
                 recipe, recipe, recipe, recipe, recipe,
                 recipe, recipe, recipe, recipe
         ));
+        EasyMock.expect(recipeService2.getBy("Default")).andReturn(Optional.of(recipe));
         EasyMock.replay(recipeService2);
 
         RecipeService recipeService3 = EasyMock.createMock(RecipeService.class);
@@ -91,6 +85,7 @@ public class MatchingServiceTest {
                 recipe, recipe, recipe, recipe, recipe,
                 recipe, recipe, recipe
         ));
+        EasyMock.expect(recipeService3.getBy("Default")).andReturn(Optional.of(recipe));
         EasyMock.replay(recipeService3);
 
         RecipeService recipeService4 = EasyMock.createMock(RecipeService.class);
@@ -99,49 +94,56 @@ public class MatchingServiceTest {
                 recipe, recipe, recipe, recipe, recipe,
                 recipe, recipe
         ));
+        EasyMock.expect(recipeService4.getBy("Default")).andReturn(Optional.of(recipe));
         EasyMock.replay(recipeService4);
 
         RecipeService recipeService5 = EasyMock.createMock(RecipeService.class);
         EasyMock.expect(recipeService5.getAll()).andReturn(List.of(recipe));
+        EasyMock.expect(recipeService5.getBy("Default")).andReturn(Optional.of(recipe));
         EasyMock.replay(recipeService5);
 
         RecipeService recipeService6 = EasyMock.createMock(RecipeService.class);
         EasyMock.expect(recipeService6.getAll()).andReturn(List.of());
+        EasyMock.expect(recipeService6.getBy("Default")).andReturn(Optional.of(recipe));
         EasyMock.replay(recipeService6);
 
+        RecipeService recipeService7 = EasyMock.createMock(RecipeService.class);
+        EasyMock.expect(recipeService7.getBy("Invalid")).andReturn(Optional.empty());
+        EasyMock.replay(recipeService7);
+
         return Stream.of(
-            Arguments.of(profile, repository, recipeService1,
+            Arguments.of(profile, recipeService1,
                     List.of(recipe, recipe, recipe, recipe, recipe,
                             recipe, recipe, recipe, recipe, recipe),
                     "Default",
-                    List.of(profile, recipeService1, dealbreakerRecipe, dislikedRecipe, recipe, repository)),
-            Arguments.of(profile, repository, recipeService2,
+                    List.of(profile, recipeService1, dealbreakerRecipe, dislikedRecipe, recipe)),
+            Arguments.of(profile, recipeService2,
                     List.of(recipe, recipe, recipe, recipe, recipe,
                             recipe, recipe, recipe, recipe, dislikedRecipe),
                     "Default",
-                    List.of(profile, recipeService2, dealbreakerRecipe, dislikedRecipe, recipe, repository)),
-            Arguments.of(profile, repository, recipeService3,
+                    List.of(profile, recipeService2, dealbreakerRecipe, dislikedRecipe, recipe)),
+            Arguments.of(profile, recipeService3,
                     List.of(recipe, recipe, recipe, recipe, recipe,
                             recipe, recipe, recipe, dislikedRecipe, dealbreakerRecipe),
                     "Default",
-                    List.of(profile, recipeService3, dealbreakerRecipe, dislikedRecipe, recipe, repository)),
-            Arguments.of(profile, repository, recipeService4,
+                    List.of(profile, recipeService3, dealbreakerRecipe, dislikedRecipe, recipe)),
+            Arguments.of(profile, recipeService4,
                     List.of(recipe, recipe, recipe, recipe, recipe,
                             recipe, recipe, dislikedRecipe, dealbreakerRecipe),
                     "Default",
-                    List.of(profile, recipeService4, dealbreakerRecipe, dislikedRecipe, recipe, repository)),
-            Arguments.of(profile, repository, recipeService5,
+                    List.of(profile, recipeService4, dealbreakerRecipe, dislikedRecipe, recipe)),
+            Arguments.of(profile, recipeService5,
                     List.of(recipe),
                     "Default",
-                    List.of(profile, recipeService5, dealbreakerRecipe, dislikedRecipe, recipe, repository)),
-            Arguments.of(profile, repository, recipeService6,
+                    List.of(profile, recipeService5, dealbreakerRecipe, dislikedRecipe, recipe)),
+            Arguments.of(profile, recipeService6,
                     List.of(),
                     "Default",
-                    List.of(profile, recipeService6, dealbreakerRecipe, dislikedRecipe, recipe, repository)),
-            Arguments.of(profile, notFoundRepository, recipeService1,
+                    List.of(profile, recipeService6, dealbreakerRecipe, dislikedRecipe, recipe)),
+            Arguments.of(profile, recipeService7,
                     List.of(),
                     "Invalid",
-                    List.of(profile, dealbreakerRecipe, dislikedRecipe, recipe, notFoundRepository))
+                    List.of(profile, recipeService7, dealbreakerRecipe, dislikedRecipe, recipe))
         );
     }
 }
