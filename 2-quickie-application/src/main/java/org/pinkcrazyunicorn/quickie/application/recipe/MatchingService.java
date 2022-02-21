@@ -38,8 +38,8 @@ public class MatchingService {
 
         ratedRecipes.sort(Map.Entry.comparingByValue());
         Collections.reverse(ratedRecipes);
-        return ratedRecipes.subList(0, 10)
-                .stream()
+        return ratedRecipes.stream()
+                .limit(10)
                 .map(Map.Entry::getKey)
                 .collect(Collectors.toList());
     }
