@@ -12,7 +12,7 @@ import java.util.stream.Stream;
 public class OpinionMapperTest {
     @ParameterizedTest
     @ValueSource(strings = {"foodgasm", "ReallyLike", "Nothing", "Null", "Dont'tKnow"})
-    public void testNonexistentFromString(String from) {
+    public void shouldNotGetInvalidOpinionFromString(String from) {
         OpinionMapper codeUnderTest = new OpinionMapper();
 
         Opinion actual = codeUnderTest.fromString(from);
@@ -22,7 +22,7 @@ public class OpinionMapperTest {
 
     @ParameterizedTest
     @MethodSource("getSuccessfulPairs")
-    public void testSuccessfulFromString(String from, Opinion shouldBe) {
+    public void shouldGetCorrectOpinionFromString(String from, Opinion shouldBe) {
         OpinionMapper codeUnderTest = new OpinionMapper();
 
         Opinion actual = codeUnderTest.fromString(from);

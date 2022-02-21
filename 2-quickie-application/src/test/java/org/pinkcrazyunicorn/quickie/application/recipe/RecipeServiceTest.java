@@ -16,7 +16,7 @@ import java.util.stream.Stream;
 public class RecipeServiceTest {
     @ParameterizedTest
     @MethodSource("getRecipeData")
-    public void testGetAll(List<Recipe> recipes) {
+    public void shouldGetAll(List<Recipe> recipes) {
         RecipeRepository repository = EasyMock.createMock(RecipeRepository.class);
         EasyMock.expect(repository.getAll()).andReturn(recipes);
 
@@ -35,7 +35,7 @@ public class RecipeServiceTest {
 
     @ParameterizedTest
     @MethodSource("getRecipeData")
-    public void testRefreshSource(List<Recipe> recipes) {
+    public void shouldRefreshAll(List<Recipe> recipes) {
         RecipeRepository repository = EasyMock.createStrictMock(RecipeRepository.class);
         Datasource source = EasyMock.createMock(Datasource.class);
         EasyMock.expect(source.getRecipes()).andReturn(recipes);
