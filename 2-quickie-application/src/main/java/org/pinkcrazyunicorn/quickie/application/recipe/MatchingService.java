@@ -38,8 +38,8 @@ public class MatchingService {
 
         ratedRecipes.sort(Map.Entry.comparingByValue());
         Collections.reverse(ratedRecipes);
-        return ratedRecipes.subList(0, 10)
-                .stream()
+        return ratedRecipes.stream()
+                .limit(10)
                 .map(Map.Entry::getKey)
                 .collect(Collectors.toList());
     }
@@ -69,7 +69,7 @@ public class MatchingService {
         if (Double.isInfinite(max) || Double.isInfinite(min)) {
             return 0;
         }
-        return (max + min) / Opinion.Dealbreaker.getWeight();
+        return (max + min) / Opinion.Dislike.getWeight();
     }
 
     private double getIntersectionOverUnion(Recipe recipe, Recipe comparing) {
