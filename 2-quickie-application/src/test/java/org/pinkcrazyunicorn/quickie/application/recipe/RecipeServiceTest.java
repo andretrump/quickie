@@ -9,7 +9,6 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.pinkcrazyunicorn.quickie.domain.recipe.Recipe;
 import org.pinkcrazyunicorn.quickie.domain.recipe.RecipeRepository;
 
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;

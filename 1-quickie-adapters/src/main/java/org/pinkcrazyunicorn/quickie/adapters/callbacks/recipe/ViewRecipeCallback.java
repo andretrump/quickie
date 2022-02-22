@@ -1,7 +1,6 @@
 package org.pinkcrazyunicorn.quickie.adapters.callbacks.recipe;
 
 import org.pinkcrazyunicorn.quickie.adapters.event.EventAnswer;
-import org.pinkcrazyunicorn.quickie.adapters.event.EventAnswerData;
 import org.pinkcrazyunicorn.quickie.adapters.event.EventCallback;
 import org.pinkcrazyunicorn.quickie.adapters.event.EventParameter;
 import org.pinkcrazyunicorn.quickie.adapters.mappers.recipe.RecipeMapper;
