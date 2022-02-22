@@ -23,7 +23,7 @@ public class Main {
 
         ProfileService profileService = new ProfileService(profileRepository);
         RecipeService recipeService = new RecipeService(recipeRepository);
-        MatchingService matchingService = new MatchingService(recipeService, recipeRepository);
+        MatchingService matchingService = new MatchingService(recipeService);
 
         Controller controller = new Controller(ui, profileService, recipeService, matchingService);
         controller.run();

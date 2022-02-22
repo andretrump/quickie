@@ -2,18 +2,47 @@ package org.pinkcrazyunicorn.quickie.application.recipe;
 
 import static org.assertj.core.api.Assertions.*;
 import org.easymock.EasyMock;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.pinkcrazyunicorn.quickie.domain.recipe.Recipe;
 import org.pinkcrazyunicorn.quickie.domain.recipe.RecipeRepository;
 
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 public class RecipeServiceTest {
+    @Test
+    public void shouldGetByOrigin() {
+        Recipe recipe = EasyMock.createMock(Recipe.class);
+        EasyMock.replay(recipe);
+        RecipeRepository repository = EasyMock.createMock(RecipeRepository.class);
+        EasyMock.expect(repository.getBy("Default")).andReturn(Optional.of(recipe));
+        EasyMock.replay(repository);
+
+        RecipeService codeUnderTest = new RecipeService(repository);
+
+        Optional<Recipe> actual = codeUnderTest.getBy("Default");
+
+        assertThat(actual).hasValue(recipe);
+    }
+
+    @Test
+    public void shouldNotGetByInvalidOrigin() {
+        RecipeRepository repository = EasyMock.createMock(RecipeRepository.class);
+        EasyMock.expect(repository.getBy("Invalid")).andReturn(Optional.empty());
+        EasyMock.replay(repository);
+
+        RecipeService codeUnderTest = new RecipeService(repository);
+
+        Optional<Recipe> actual = codeUnderTest.getBy("Invalid");
+
+        assertThat(actual).isEmpty();
+    }
+
     @ParameterizedTest
     @MethodSource("getRecipeData")
     public void shouldGetAll(List<Recipe> recipes) {

@@ -5,23 +5,20 @@ import org.pinkcrazyunicorn.quickie.domain.profile.Opinion;
 import org.pinkcrazyunicorn.quickie.domain.profile.Profile;
 import org.pinkcrazyunicorn.quickie.domain.recipe.Ingredient;
 import org.pinkcrazyunicorn.quickie.domain.recipe.Recipe;
-import org.pinkcrazyunicorn.quickie.domain.recipe.RecipeRepository;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class MatchingService {
     private final RecipeService recipeService;
-    private final RecipeRepository repository;
 
-    public MatchingService(RecipeService recipeService, RecipeRepository repository) {
+    public MatchingService(RecipeService recipeService) {
         super();
         this.recipeService = recipeService;
-        this.repository = repository;
     }
 
     public Collection<Recipe> getMatchingRecipesFor(String origin, Profile profile) {
-        Optional<Recipe> maybeRecipe = this.repository.getBy(origin);
+        Optional<Recipe> maybeRecipe = this.recipeService.getBy(origin);
         if (maybeRecipe.isEmpty()) {
             System.out.println("Warning: Could not find recipe");
             return List.of();
