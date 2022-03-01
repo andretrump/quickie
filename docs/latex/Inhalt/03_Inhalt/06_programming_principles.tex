@@ -3,5 +3,20 @@
 \section{SOLID}
 
 \section{GRASP}
+GRASP steht für \enquote{General Responsibility Assignment Software Patterns/Principles}. Hierbei handelt es sich um neun Lösungsschemata für typische Fragestellungen in der Softwareentwicklung. Die Grundlage für GRASP bilden die beiden Prinzipien \enquote{Geringe Kopplung} und \enquote{Hohe Kohäsion}. Diese beiden sollen in den beiden nachfolgenden Abschnitten erläutert werden und es soll aufgezeigt werden, inwiefern diese im vorliegenden Projekt zur Anwendung kamen.
+
+\subsection{Geringe Kopplung}
+Mit Kopplung wird in diesem Zusammenhang ein Maß für die Abhängigkeit einer Klasse von ihrer Umgebung bezeichnet. Das Ziel ist es, Code mit möglichst geringer Kopplung zu schreiben. Auf eine besonders geringe Kopplung wurde beim vorliegenden Projekt besonders zwischen der Applikationsschicht und der Benutzeroberfläche Wert gelegt: Hier wird die geringste Stufe der Kopplung verwendet, nämlich eine rein eventbasierte Kommunikation durch die Adapterschicht.
+
+Ein Beispiel für etwas stärkere Kopplung findet sich in den Serviceklassen der Adapterschicht. Müssen hier Daten persistiert werden, werden lediglich Methoden der im Domaincode definierten Interfaces für die Repositories aufgerufen und so eine direkte Kopplung an eine bestimmte Implementierung eines Repositories vermieden.
+
+Ein Beispiel für starke Kopplung befindet sich in den Mapperklassen der Adapterschicht: Der \code{ProfileMapper} ist durch statische Methodenaufrufe stark an den \code{FoodMapper} und den \code{OpinionMapper} gekoppelt. Darüber hinaus werden der \code{FoodMapper} und der \code{OpinionMapper} auch nicht injected, sondern direkt im Konstruktor instanziiert, was die Kopplung zusätzlich erhöht.
+
+\subsection{Hohe Kohäsion}
+Die Kohäsion ist ein Maß für den inneren Zusammenhalt einer Klasse, zeigt also wie eng die Methoden und Attribute einer Klasse zusammenarbeiten. Ziel ist es, Klassen mit möglichst hoher Kohäsion zu schreiben.
+
+Ein Negativbeispiele, bei denen die Kohäsion in den Klassen gering ist, sind der \code{ProfileService} und der \code{RecipeService} in der Applikationsschicht. Hier betreffen die Methoden einer Klasse zwar nur eine Entity, allerdings implementieren die Methoden jeweils völlig unabhängige Use Cases, welche dennoch alle in einer Klasse in einer Klasse zusammengefasst sind.
+
+Ein Beispiel für Klassen mit hoher Kohäsion sind die Mapperklassen der Adapterschicht, da sich jede der Klassen ebenfalls nur mit dem Mapping einer einzigen Entity bzw. eines Value Objects in verschiedene Formate befasst und darüber hinaus befasst sich jeder Klasse nur mit einem einzigen Use-Case, dem Mapping. Damit gehören die Methoden eines Klasse semantisch zusammen.
 
 \section{DRY}
