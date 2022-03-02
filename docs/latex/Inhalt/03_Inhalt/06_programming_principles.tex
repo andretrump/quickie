@@ -1,20 +1,22 @@
 \chapter{Programming Principles}
-Programming Principles oder zu deutsch Programmierprinzipien sind eine Verallgemeinerung wiederkehrender Erkenntnisse in der Softwareentwicklung und liefern Entwicklern Vorgaben für einen bestimmten Programmierstil. Speziell für die objektorientierte Programmierung existieren die objektorientierten Prinzipien, welche als Idealvorstellung für \enquote{guten} objektorientierten Code dienen. Einige dieser Prinzipien werden in den nachfolgenden Abschnitten vorgestellt und deren Anwendung im vorliegenden Projekt untersucht.
+Programming Principles oder zu deutsch Programmierprinzipien sind eine Verallgemeinerung wiederkehrender Erkenntnisse in der Softwareentwicklung und liefern Entwicklern Richtlinien für einen bestimmten Programmierstil. Speziell für die objektorientierte Programmierung existieren die objektorientierten Prinzipien, welche als Idealvorstellung für \enquote{guten} objektorientierten Code dienen. Einige dieser Prinzipien werden in den nachfolgenden Abschnitten vorgestellt und deren Anwendung im vorliegenden Projekt untersucht.
 
 \section{SOLID}
-Die SOLID-Prinzipien sind sind eine Sammlung von Regeln mit dem Ziel wartbare und erweiterbare Software mit einer langlebigen Codebasis zu schreiben. SOLID steht hierbei für Single Responsibility Principle, Open/Closed Principle, Liskov Substitution Principle, Interface Segregation Principle und Dependency Inversion Principle.
+Die SOLID-Prinzipien sind sind eine Sammlung von Regeln mit dem Ziel wartbare und erweiterbare Software mit einer langlebigen Codebasis zu schreiben. Jeder Buchstabe in SOLID steht für den Namen eines einzelnen Prinzips. Im Folgenden wird auf jedes der Prinzipien im Detail eingegangen.
 
 \subsection{Single Responsibility Principle}
-Das Single Responsibility Principle besagt, dass jede Klasse nur eine Verantwortlichkeit haben sollte. 
+Das Single Responsibility Principle besagt, dass jede Klasse nur eine Verantwortlichkeit haben soll. 
 
-Beispiele für Klassen, bei denen dieses Prinzip verletzt wurde, sind der \code{ProfileService} und der \code{RecipeService} in der Applikationsschicht, da jede dieser Klassen mehrere Use-Cases implementiert. So implementiert der ProfileService die gesamte Interaktion des Nutzers mit einem Profil vom Anlegen, Bearbeiten und Löschen bis zum Setzen und Entfernen von Opinions.
+Ein Beispiel für eine Klasse, bei der dieses Prinzip verletzt wurde, ist der \code{ProfileService} in der Applikationsschicht, da dieser mehrere Use-Cases umsetzt: Er implementiert die gesamte Interaktion des Nutzers mit einem Profil vom Anlegen, Bearbeiten und Löschen bis zum Setzen und Entfernen von Opinions.
 
 Ein Positivbeispiel für eine Klasse, die das Single Responsibility Principle strikt einhält, ist der \code{Matching Service}, da dieser einzig für das Finden von Rezepten mit hoher Übereinstimmung in den Zutaten zuständig ist. Ebenso verhält es sich mit den Mapperklassen der Adapterschicht: Diese sind lediglich für das Mapping jeweils einer Entity oder eines Value Objects verantwortlich.
 
-\subsection{Open/Closed Principle}
-Das Open/Closed besagt, dass Klassen offen für Erweiterungen, aber geschlossen bezüglich Veränderungen sein sollten. Folglich führen neue oder veränderte Anforderungen nur zu einer Erweiterung des Codes, bestehender Code sollte aber nicht mehr geändert werden müssen.
+Weitere Beispiele für Klassen, welche das Single Responsibility Principle einhalten, sind die Callback-Klassen in der Adapterschicht, da diese jeweils genau einen Use-Case für die Benutzeroberfläche abbilden. So erlaubt beispielsweise der \code{AddProfileCallback} lediglich das Anlegen eines Profiles. Für das Anzeigen und Löschen der Profiles existieren separate Callback-Klassen.
 
-Die beiden Klassen \code{ProfileService} und der \code{RecipeService}, die auch das Single Responsibility Principle verletzen, sind auch Negativbeispiele für das Open/Closed Principle: Da diese Klassen alle Use-Cases implementieren, die Profiles bzw. Recipes betreffen, müssen bei geänderten oder neuen Anforderungen diese beiden bestehenden Klassen verändert werden. Damit sind diese nicht geschlossen gegenüber Veränderungen.
+\subsection{Open/Closed Principle}
+Das Open/Closed besagt, dass Klassen offen für Erweiterungen, aber geschlossen bezüglich Veränderungen sein sollen. Folglich führen neue oder veränderte Anforderungen nur zu einer Erweiterung des Codes, bestehender Code sollte nicht mehr geändert werden müssen.
+
+Die beiden Klassen \code{ProfileService} und der \code{RecipeService}, die auch das Single Responsibility Principle verletzen, sind auch Negativbeispiele für das Open/Closed Principle: Da diese Klassen jeweils alle Use-Cases implementieren, die Profiles bzw. Recipes betreffen, müssen bei geänderten oder neuen Anforderungen diese beiden bestehenden Klassen verändert werden.
 
 Ein Beispiel für die Einhaltung des Open/Closed Principle Bildet die Adapterschicht: Hier existiert für jeden einzelnen Use-Case eine separate Callback-Klasse, sodass bei neuen Anforderungen lediglich eine neue Callback-Klasse implementiert werden müsste und damit der bestehende Code nur erweitert. Die einzige Änderung an bestehendem Code würde im \code{Controller} stattfinden, da dort neue Events bzw. die zugehörigen Callbacks registriert werden.
 
