@@ -38,9 +38,7 @@ public class JPAProfileRepository extends PersistentProfileRepository {
 
     @Override
     protected void persistentAdd(PersistentProfile profile) {
-        if (!(profile instanceof JPAProfile)) {
-            throw new IllegalArgumentException("JPAProfileRepository only supports JPAProfiles");
-        }
+        this.assertInstanceOfJPAProfile(profile);
         EntityTransaction transaction = this.entityManager.getTransaction();
         transaction.begin();
         try {
@@ -54,9 +52,7 @@ public class JPAProfileRepository extends PersistentProfileRepository {
 
     @Override
     protected void persistentUpdate(PersistentProfile profile) {
-        if (!(profile instanceof JPAProfile)) {
-            throw new IllegalArgumentException("JPAProfileRepository only supports JPAProfiles");
-        }
+        this.assertInstanceOfJPAProfile(profile);
         EntityTransaction transaction = this.entityManager.getTransaction();
         transaction.begin();
         try {
@@ -70,9 +66,7 @@ public class JPAProfileRepository extends PersistentProfileRepository {
 
     @Override
     protected void persistentRemove(PersistentProfile profile) {
-        if (!(profile instanceof JPAProfile)) {
-            throw new IllegalArgumentException("JPAProfileRepository only supports JPAProfiles");
-        }
+        this.assertInstanceOfJPAProfile(profile);
         EntityTransaction transaction = this.entityManager.getTransaction();
         transaction.begin();
         try {
@@ -81,6 +75,12 @@ public class JPAProfileRepository extends PersistentProfileRepository {
         } catch (Exception e) {
             transaction.rollback();
             throw e;
+        }
+    }
+
+    private void assertInstanceOfJPAProfile(PersistentProfile profile) {
+        if (!(profile instanceof JPAProfile)) {
+            throw new IllegalArgumentException("JPAProfileRepository only supports JPAProfiles");
         }
     }
 }

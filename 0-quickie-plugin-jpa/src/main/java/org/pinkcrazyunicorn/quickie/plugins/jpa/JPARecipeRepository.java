@@ -19,9 +19,7 @@ public class JPARecipeRepository extends PersistentRecipeRepository {
 
     @Override
     protected void persistentRefreshRecipe(PersistentRecipe recipe) {
-        if (!(recipe instanceof JPARecipe)) {
-            throw new IllegalArgumentException("JPARecipeRepository only supports JPARecipes");
-        }
+        this.assertInstanceOfJPARecipe(recipe);
         EntityTransaction transaction = this.entityManager.getTransaction();
         transaction.begin();
         try {
@@ -47,5 +45,11 @@ public class JPARecipeRepository extends PersistentRecipeRepository {
     @Override
     protected PersistentRecipe persistentGetBy(String origin) {
         return this.entityManager.find(JPARecipe.class, origin);
+    }
+
+    private void assertInstanceOfJPARecipe(PersistentRecipe recipe) {
+        if (!(recipe instanceof JPARecipe)) {
+            throw new IllegalArgumentException("JPARecipeRepository only supports JPARecipes");
+        }
     }
 }
