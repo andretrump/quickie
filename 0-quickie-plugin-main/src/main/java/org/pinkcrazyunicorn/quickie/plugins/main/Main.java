@@ -7,16 +7,18 @@ import org.pinkcrazyunicorn.quickie.plugins.gson.GSONFormatter;
 import org.pinkcrazyunicorn.quickie.plugins.jpa.JPAProfileRepository;
 import org.pinkcrazyunicorn.quickie.plugins.cli.CommandLineUI;
 import org.pinkcrazyunicorn.quickie.plugins.jpa.JPARecipeRepository;
-import org.pinkcrazyunicorn.quickie.plugins.jpa.PersistenceManager;
 import org.pinkcrazyunicorn.quickie.adapters.Controller;
 import org.pinkcrazyunicorn.quickie.domain.profile.ProfileRepository;
 import org.pinkcrazyunicorn.quickie.application.profile.ProfileService;
 
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
 public class Main {
     public static void main(String[] args) {
-        PersistenceManager persistenceManager = PersistenceManager.getInstance();
-        ProfileRepository profileRepository = new JPAProfileRepository(persistenceManager.getManager());
-        RecipeRepository recipeRepository = new JPARecipeRepository(persistenceManager.getManager());
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("quickie");
+        ProfileRepository profileRepository = new JPAProfileRepository(entityManagerFactory.createEntityManager());
+        RecipeRepository recipeRepository = new JPARecipeRepository(entityManagerFactory.createEntityManager());
         GSONFormatter formatter = new GSONFormatter();
 
         CommandLineUI ui = new CommandLineUI(args, formatter);
