@@ -88,13 +88,13 @@ public class HensslerScraper {
 
         Element ingredientList = this.findIngredientList(recipePage);
         for (Element ingredientElement : ingredientList.children()) {
-            Ingredient ingredient = null;
+            Ingredient ingredient;
             try {
                 ingredient = this.parseIngredientText(ingredientElement.text());
+                ingredients.add(ingredient);
             } catch (FailedToParseIngredient e) {
                 System.out.println("Warning: Failed to parse ingredient text: " + ingredientElement.text());
             }
-            ingredients.add(ingredient);
         }
 
         return ingredients;
