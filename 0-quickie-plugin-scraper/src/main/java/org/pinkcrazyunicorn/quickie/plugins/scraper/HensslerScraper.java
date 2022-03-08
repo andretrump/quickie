@@ -8,6 +8,8 @@ import org.pinkcrazyunicorn.quickie.domain.recipe.Ingredient;
 import org.pinkcrazyunicorn.quickie.domain.recipe.Quantity;
 import org.pinkcrazyunicorn.quickie.domain.recipe.Recipe;
 import org.pinkcrazyunicorn.quickie.domain.recipe.Unit;
+import org.pinkcrazyunicorn.quickie.plugins.scraper.exceptions.FailedToParseIngredient;
+import org.pinkcrazyunicorn.quickie.plugins.scraper.exceptions.FailedToParseRecipe;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -42,7 +44,7 @@ public class HensslerScraper {
         this.downloader = new CachedDownloader(HensslerScraper.BASE_URL);
     }
 
-    public Recipe getRecipeFrom(String url) throws IOException {
+    public Recipe getRecipeFrom(String url) throws IOException, FailedToParseRecipe {
         Document recipePage = this.downloader.getDocument(url);
         try {
             List<Ingredient> ingredients = this.scrapeIngredients(recipePage);
@@ -51,10 +53,8 @@ public class HensslerScraper {
 
             return new Recipe(ingredients, name, text, BASE_URL + url);
         } catch (NullPointerException e) {
-            e.printStackTrace();
-            System.out.println("Error: Recipe could not be parsed. The site changed its layout most likely");
+            throw new FailedToParseRecipe();
         }
-        return null;
     }
 
     private String scrapeTitle(Document recipePage) {
@@ -88,21 +88,24 @@ public class HensslerScraper {
 
         Element ingredientList = this.findIngredientList(recipePage);
         for (Element ingredientElement : ingredientList.children()) {
-            Ingredient ingredient = this.parseIngredientText(ingredientElement.text());
-            if (ingredient != null) {
+            Ingredient ingredient;
+            try {
+                ingredient = this.parseIngredientText(ingredientElement.text());
                 ingredients.add(ingredient);
+            } catch (FailedToParseIngredient e) {
+                System.out.println("Warning: Failed to parse ingredient text: " + ingredientElement.text());
             }
         }
 
         return ingredients;
     }
 
-    private Ingredient parseIngredientText(String text) {
+    private Ingredient parseIngredientText(String text) throws FailedToParseIngredient {
         text = text.replace(", ", "/");
 
         String[] parts = text.split(" ");
         if (parts.length < 3) {
-            return null;
+            throw new FailedToParseIngredient();
         }
 
         String foodString = Arrays.stream(parts).skip(2).collect(Collectors.joining(" "));
@@ -115,7 +118,7 @@ public class HensslerScraper {
             if (amountString.contains("/")) {
                 String[] amountParts = amountString.split("/");
                 if (amountParts.length != 2) {
-                    return null;
+                    throw new FailedToParseIngredient();
                 }
                 amount = Double.parseDouble(amountParts[0]) / Double.parseDouble(amountParts[1]);
             } else if (amountString.contains("-")) {

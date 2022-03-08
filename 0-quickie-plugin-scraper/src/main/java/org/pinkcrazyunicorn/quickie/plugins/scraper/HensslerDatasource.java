@@ -2,6 +2,7 @@ package org.pinkcrazyunicorn.quickie.plugins.scraper;
 
 import org.pinkcrazyunicorn.quickie.application.recipe.Datasource;
 import org.pinkcrazyunicorn.quickie.domain.recipe.Recipe;
+import org.pinkcrazyunicorn.quickie.plugins.scraper.exceptions.FailedToParseRecipe;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -26,14 +27,14 @@ public class HensslerDatasource implements Datasource {
             }
             try {
                 Recipe recipe = this.scraper.getRecipeFrom(recipeURL);
-                if (recipe != null) {
-                    recipes.add(recipe);
-                }
+                recipes.add(recipe);
                 Thread.sleep(200);
             } catch (IOException e) {
                 System.out.println("Warning: Could not load recipe from " + recipeURL);
             } catch (InterruptedException e) {
                 System.out.println("Warning: Could not sleep after request");
+            } catch (FailedToParseRecipe e) {
+                System.out.println("Error: Recipe with URL " + recipeURL + " could not be parsed. The site changed its layout most likely");
             }
         }
 
